@@ -6,9 +6,21 @@
 package concesionaria.servicios;
 
 /**
- *
- * @author joni
+ * Clase Singleton de logueo
+ * Utilizar metodo getInstancia
  */
 public class Logger {
+    private static Logger log;
+    private Logger(){};
     
+    public static Logger getInstancia(){
+        if(log == null)
+            return new Logger();
+        else
+            return log;
+    }
+    
+    public void log(String mensaje){
+        System.out.println(mensaje);
+    }
 }
