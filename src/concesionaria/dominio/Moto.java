@@ -41,5 +41,5 @@ public class Moto extends Vehiculo {
             return this.precio * 0.3;
         
         return this.precio * 0.21;
-    }
+    }   
 }

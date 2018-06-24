@@ -41,7 +41,10 @@ public class Auto extends Vehiculo {
 
     @Override
     public double calcularComisionVendedor() {
-        return this.precio * 0.10;
+        if (this.litrosBaul > 300) 
+            return this.precio * 0.2;
+        
+        return this.precio * 0.1;
     }
 
     @Override
