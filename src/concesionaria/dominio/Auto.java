@@ -46,6 +46,10 @@ public class Auto extends Vehiculo {
 
     @Override
     public double calcularImpuesto() {
+        
+        if (this.cantidadAirbags >= 2) 
+            return this.precio * 0.105;
+        
         return this.precio * 0.21;
     }
     
