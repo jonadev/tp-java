@@ -37,10 +37,9 @@ public class Moto extends Vehiculo {
 
     @Override
     public double calcularImpuesto() {
-        return this.precio * 0.105;
+        if (this.cantidadTiempoMotor == 2) 
+            return this.precio * 0.3;
+        
+        return this.precio * 0.21;
     }
-    
-    
-    
-    
 }
