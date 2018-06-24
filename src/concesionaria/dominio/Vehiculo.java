@@ -13,13 +13,15 @@ package concesionaria.dominio;
 public abstract class Vehiculo {
     
     private int ruedas;
-    private int modelo;
+    private int anio;
     private String color;
     private boolean cajaAutomatica;
     private String tipoCombustible;
     private int cantidadKilometros;
     private int cilindrada;
     private String patente;
+    private String marca;
+    private String modelo;
     protected double precio;
 
     public int getRuedas() {
@@ -30,12 +32,12 @@ public abstract class Vehiculo {
         this.ruedas = ruedas;
     }
 
-    public int getModelo() {
-        return modelo;
+    public int getAnio() {
+        return anio;
     }
 
-    public void setModelo(int modelo) {
-        this.modelo = modelo;
+    public void setAnio(int anio) {
+        this.anio = anio;
     }
 
     public String getColor() {
@@ -92,6 +94,22 @@ public abstract class Vehiculo {
 
     public void setPrecio(double precio) {
         this.precio = precio;
+    }
+
+    public String getMarca() {
+        return marca;
+    }
+
+    public void setMarca(String marca) {
+        this.marca = marca;
+    }
+
+    public String getModelo() {
+        return modelo;
+    }
+
+    public void setModelo(String modelo) {
+        this.modelo = modelo;
     }
     
     public abstract double calcularComisionVendedor();
