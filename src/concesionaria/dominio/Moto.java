@@ -32,7 +32,10 @@ public class Moto extends Vehiculo {
 
     @Override
     public double calcularComisionVendedor() {
-        return this.precio * 0.05;
+        if (this.cantidadTiempoMotor == 2) 
+            return this.precio * 0.2;
+        
+        return this.precio * 0.1;
     }
 
     @Override
