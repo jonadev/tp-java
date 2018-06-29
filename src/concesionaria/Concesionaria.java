@@ -5,9 +5,11 @@
  */
 package concesionaria;
 
+import concesionaria.repositorios.VehiculoRepositorio;
 import concesionaria.servicios.Logger;
 import concesionaria.views.DesignConcesionariaList2;
 import java.awt.Component;
+import java.sql.SQLException;
 
 /**
  *
@@ -28,6 +30,8 @@ public class Concesionaria extends javax.swing.JFrame {
         
         Logger logger = Logger.getInstancia();
         logger.log("poniendo panel");
+        VehiculoRepositorio repo = new VehiculoRepositorio();
+        repo.guardar();
         
     }
 
