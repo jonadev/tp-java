@@ -5,9 +5,16 @@
  */
 package concesionaria;
 
+import concesionaria.dominio.Vehiculo;
 import concesionaria.servicios.Logger;
+import concesionaria.servicios.VehiculosService;
 import concesionaria.views.DesignConcesionariaList2;
+import concesionaria.views.ListadoVehiculos;
+import concesionaria.views.prueba;
 import java.awt.Component;
+import java.awt.event.WindowEvent;
+import java.util.ArrayList;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -21,13 +28,67 @@ public class Concesionaria extends javax.swing.JFrame {
     public Concesionaria() {
         initComponents();
         
-        DesignConcesionariaList2 designConcesionariaList2 = new DesignConcesionariaList2();
-        //designConcesionariaList2.init();
-
-        Component add = jPanel1.add(designConcesionariaList2);
+        ListadoVehiculos listadoVehiculos = new ListadoVehiculos();
         
+      
+    /*   java.awt.EventQueue.invokeLater(new Runnable() {
+    @Override
+    public void run() {
+        listadoVehiculos.toFront();
+        listadoVehiculos.repaint();
+        listadoVehiculos.setVisible(true);
+    }
+});*/
+
+       // listadoVehiculos.dispatchEvent(new WindowEvent(listadoVehiculos, WindowEvent.WINDOW_CLOSING));
         Logger logger = Logger.getInstancia();
         logger.log("poniendo panel");
+        
+         vehiculosTable.removeAll();
+        
+        VehiculosService vehiculoService = new VehiculosService();
+        
+         ArrayList<Vehiculo> vehiculos = vehiculoService.getAll();
+         
+            
+         String[] columnNames = {
+                        "Marca",
+                        "Modelo",
+                        "Año",
+                        "Kilometros",
+                        "Precio"};
+         
+         Object[][] data = {
+            {"Kathy", "Smith",
+             "Snowboarding", new Integer(5), new Boolean(false)},
+            {"John", "Doe",
+             "Rowing", new Integer(3), new Boolean(true)},
+            {"Sue", "Black",
+             "Knitting", new Integer(2), new Boolean(false)},
+            {"Jane", "White",
+             "Speed reading", new Integer(20), new Boolean(true)},
+            {"Joe", "Brown",
+             "Pool", new Integer(10), new Boolean(false)}
+        };
+         
+         DefaultTableModel tableModel = new DefaultTableModel(columnNames, 0);
+          
+         vehiculosTable.setModel(tableModel);
+         
+         for (Vehiculo vehiculo : vehiculos) {
+             
+            Object[] vehiculosData = new Object[] {vehiculo.getMarca(), 
+                                                    vehiculo.getModelo(), 
+                                                    vehiculo.getAnio(), 
+                                                    vehiculo.getCantidadKilometros(), 
+                                                    vehiculo.getPrecio(), 
+                                                    };
+ 
+            tableModel.addRow(vehiculosData);
+        }
+         
+          
+         logger.log("Set Table");
         
     }
 
@@ -40,32 +101,72 @@ public class Concesionaria extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jPanel1 = new javax.swing.JPanel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        vehiculosTable = new javax.swing.JTable();
+        panel3 = new java.awt.Panel();
+        jLabel3 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 390, Short.MAX_VALUE)
+        vehiculosTable.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane1.setViewportView(vehiculosTable);
+
+        panel3.setBackground(new java.awt.Color(21, 77, 161));
+
+        jLabel3.setFont(new java.awt.Font("SansSerif", 1, 36)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel3.setText("Concesionaria Buenos Aires");
+
+        javax.swing.GroupLayout panel3Layout = new javax.swing.GroupLayout(panel3);
+        panel3.setLayout(panel3Layout);
+        panel3Layout.setHorizontalGroup(
+            panel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panel3Layout.createSequentialGroup()
+                .addGap(218, 218, 218)
+                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 495, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(168, Short.MAX_VALUE))
         );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+        panel3Layout.setVerticalGroup(
+            panel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, 90, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+            .addGap(0, 901, Short.MAX_VALUE)
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createSequentialGroup()
+                    .addContainerGap()
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(panel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                            .addGap(53, 53, 53)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 664, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGap(164, 164, 164)))
+                    .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGap(0, 300, Short.MAX_VALUE)
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createSequentialGroup()
+                    .addGap(11, 11, 11)
+                    .addComponent(panel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
         );
 
         pack();
@@ -112,6 +213,13 @@ public class Concesionaria extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JPanel jPanel1;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JScrollPane jScrollPane1;
+    private java.awt.Panel panel1;
+    private java.awt.Panel panel2;
+    private java.awt.Panel panel3;
+    private javax.swing.JTable vehiculosTable;
     // End of variables declaration//GEN-END:variables
 }
