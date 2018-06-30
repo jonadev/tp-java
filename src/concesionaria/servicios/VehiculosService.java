@@ -23,7 +23,8 @@ public class VehiculosService {
     
     
     public Vehiculo getById(Long id){
-       return repositorio.obtener(id);
+       return new Auto();
+        //return repositorio.obtener(id);
     }
     
     public List<Vehiculo> getAll(){

@@ -12,7 +12,7 @@ import concesionaria.dominio.Moto;
 import concesionaria.dominio.Vehiculo;
 import concesionaria.repositorios.VehiculoRepositorio;
 import concesionaria.servicios.VehiculosService;
-import concesionaria.views.testPanel;
+import concesionaria.views.EdicionVehiculosPanel;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.util.List;
@@ -191,14 +191,14 @@ public class Concesionaria extends javax.swing.JFrame {
        
     }
 
-     public void openEditVehiculo(int vehiculoId){
+      public void openEditVehiculo(int vehiculoId){
          // EdicionVehiculos edicionVehiculos =new EdicionVehiculos(vehiculoId);
           //edicionVehiculos.setVisible(true);
-          testPanel designConcesionariaList2 = new testPanel();
+          EdicionVehiculosPanel edicionVehiculosPanel = new EdicionVehiculosPanel(vehiculoId);
           
-          JFrame f=new JFrame();
+           JFrame f=new JFrame();
           
-            f.add(designConcesionariaList2,BorderLayout.CENTER);
+            f.add(edicionVehiculosPanel,BorderLayout.CENTER);
             f.setVisible(true);
             f.setExtendedState(f.getExtendedState() | JFrame.MAXIMIZED_BOTH);
             
@@ -207,7 +207,7 @@ public class Concesionaria extends javax.swing.JFrame {
           //designConcesionariaList2.setVisible(true);
        
           //this.add(designConcesionariaList2);
-          designConcesionariaList2.setPreferredSize(new Dimension(200,200));
+          edicionVehiculosPanel.setPreferredSize(new Dimension(200,200));
           
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables

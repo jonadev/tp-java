@@ -34,7 +34,7 @@ public class EdicionVehiculosPanel extends javax.swing.JPanel {
         
         VehiculosService vehiculosService = new VehiculosService();
         
-        Vehiculo vehiculo = vehiculosService.getById(idVehiculo);
+        Vehiculo vehiculo =  null;//vehiculosService.getById(idVehiculo);
         
         if (vehiculo == null) 
             return;
