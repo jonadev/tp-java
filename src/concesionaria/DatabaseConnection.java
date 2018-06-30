@@ -7,7 +7,11 @@ package concesionaria;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 
 /**
@@ -39,5 +43,26 @@ public abstract class DatabaseConnection {
         return connection;
     }
     
-    //TODO Cerrar los ps, con, etc
+    protected synchronized void close(PreparedStatement ps, ResultSet rs){
+        try {
+            if(rs != null){
+                rs.close();
+            }
+            if(ps != null){
+                ps.close();
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(DatabaseConnection.class.getName()).log(Level.SEVERE, null, ex);
+        }        
+    }
+    
+    protected synchronized void close(Connection con){
+        try {
+            if(con != null){
+                con.close();
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(DatabaseConnection.class.getName()).log(Level.SEVERE, null, ex);
+        }        
+    }
 }

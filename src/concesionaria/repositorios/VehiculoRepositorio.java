@@ -6,6 +6,7 @@
 package concesionaria.repositorios;
 
 import concesionaria.DatabaseConnection;
+import concesionaria.dominio.Auto;
 import concesionaria.dominio.Vehiculo;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -17,34 +18,110 @@ import java.util.logging.Logger;
 
 /**
  *
- * @author joni
+ * @author Jona
  */
 public class VehiculoRepositorio extends DatabaseConnection {
     private final String tabla = "vehiculo";
     
-    public void guardar() {
+    public void guardar(Vehiculo vehiculo) {
+        Connection con = null;
+        PreparedStatement ps = null;
+        
         try {
-            Connection con = getConnection();
-            PreparedStatement ps = con.prepareStatement("select asd from vehiculo");
-            ResultSet rs = ps.executeQuery();
-            while (rs.next()) { 
-                System.out.println (rs.getString("asd")); 
-            }
+            con = getConnection();
+            ps = con.prepareStatement("INSERT INTO vehiculo VALUES(?)");
+            ps.setString(1,vehiculo.getColor());
+            ps.execute();
         } catch (SQLException ex) {
             Logger.getLogger(VehiculoRepositorio.class.getName()).log(Level.SEVERE, null, ex);
+        }finally{
+            close(ps,null);
         }
     }
     
     public Vehiculo obtener(Long id){
-        return null;
+        Connection con = null;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        Vehiculo vehiculo = null;
+        
+        try{
+            con = getConnection();
+            ps = con.prepareStatement("SELECT id, color FROM vehiculo WHERE id = ?");
+            ps.setLong(1, id);
+            rs = ps.executeQuery();
+            
+            if(rs.next()){
+                vehiculo = new Auto();
+                vehiculo.setId(rs.getLong("id"));
+                vehiculo.setColor(rs.getString("color"));
+            }
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(VehiculoRepositorio.class.getName()).log(Level.SEVERE, null, ex);
+        }finally{
+            close(ps,rs);
+        }
+        return vehiculo;
     }
     
     public List<Vehiculo> listar(){
-        return null;
+        Connection con = null;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        List<Vehiculo> vehiculos = null;
+        
+        try{
+            con = getConnection();
+            ps = con.prepareStatement("SELECT id, color FROM vehiculo");
+            rs = ps.executeQuery();
+            
+            while(rs.next()){
+                Auto auto = new Auto();
+                auto.setId(rs.getLong("id"));
+                auto.setColor(rs.getString("color"));
+                vehiculos.add(auto);
+            }
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(VehiculoRepositorio.class.getName()).log(Level.SEVERE, null, ex);
+        }finally{
+            close(ps,rs);
+        }
+        return vehiculos;
     }
     
-    public void eliminar(){
-    
+    public void eliminar(Long id){
+        Connection con = null;
+        PreparedStatement ps = null;
+        
+        try{
+            con = getConnection();
+            ps = con.prepareStatement("DELETE FROM vehiculo WHERE id = ?");
+            ps.setLong(1,id);
+            ps.executeUpdate();               
+        } catch (SQLException ex) {
+            Logger.getLogger(VehiculoRepositorio.class.getName()).log(Level.SEVERE, null, ex);
+        }finally{
+            close(ps,null);
+        }
     }
+    
+    public void actualizar(Vehiculo vehiculo){
+        Connection con = null;
+        PreparedStatement ps = null;
+        
+        try{
+            con = getConnection();
+            ps = con.prepareStatement("UPDATE vehiculo SET color = ? WHERE id = ?");
+            ps.setString(1, vehiculo.getColor());
+            ps.setLong(2,vehiculo.getId());
+            ps.executeUpdate();               
+        } catch (SQLException ex) {
+            Logger.getLogger(VehiculoRepositorio.class.getName()).log(Level.SEVERE, null, ex);
+        }finally{
+            close(ps,null);
+        }
+    }   
     
 }
