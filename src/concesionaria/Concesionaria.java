@@ -5,15 +5,26 @@
  */
 package concesionaria;
 
+import static com.sun.xml.internal.fastinfoset.alphabet.BuiltInRestrictedAlphabets.table;
+import concesionaria.customImplementations.ConcesionariaSelectionListener;
+import concesionaria.customImplementations.VehiculosTableModel;
 import concesionaria.dominio.Vehiculo;
 import concesionaria.servicios.Logger;
 import concesionaria.servicios.VehiculosService;
 import concesionaria.views.DesignConcesionariaList2;
-import concesionaria.views.ListadoVehiculos;
+import concesionaria.views.EdicionVehiculos;
 import concesionaria.views.prueba;
+import concesionaria.views.testPanel;
+import java.awt.BorderLayout;
 import java.awt.Component;
+import java.awt.Dimension;
+import java.awt.Frame;
 import java.awt.event.WindowEvent;
 import java.util.ArrayList;
+import javax.swing.JFrame;
+import javax.swing.JTable;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -28,7 +39,7 @@ public class Concesionaria extends javax.swing.JFrame {
     public Concesionaria() {
         initComponents();
         
-        ListadoVehiculos listadoVehiculos = new ListadoVehiculos();
+        EdicionVehiculos listadoVehiculos = new EdicionVehiculos();
         
       
     /*   java.awt.EventQueue.invokeLater(new Runnable() {
@@ -52,32 +63,21 @@ public class Concesionaria extends javax.swing.JFrame {
          
             
          String[] columnNames = {
+                        "Id",
                         "Marca",
                         "Modelo",
                         "Año",
                         "Kilometros",
                         "Precio"};
          
-         Object[][] data = {
-            {"Kathy", "Smith",
-             "Snowboarding", new Integer(5), new Boolean(false)},
-            {"John", "Doe",
-             "Rowing", new Integer(3), new Boolean(true)},
-            {"Sue", "Black",
-             "Knitting", new Integer(2), new Boolean(false)},
-            {"Jane", "White",
-             "Speed reading", new Integer(20), new Boolean(true)},
-            {"Joe", "Brown",
-             "Pool", new Integer(10), new Boolean(false)}
-        };
-         
-         DefaultTableModel tableModel = new DefaultTableModel(columnNames, 0);
-          
+        VehiculosTableModel tableModel = new VehiculosTableModel(columnNames, 0);
          vehiculosTable.setModel(tableModel);
          
          for (Vehiculo vehiculo : vehiculos) {
              
-            Object[] vehiculosData = new Object[] {vehiculo.getMarca(), 
+            Object[] vehiculosData = new Object[] {
+                                                    vehiculo.getId(),
+                                                    vehiculo.getMarca(), 
                                                     vehiculo.getModelo(), 
                                                     vehiculo.getAnio(), 
                                                     vehiculo.getCantidadKilometros(), 
@@ -87,9 +87,9 @@ public class Concesionaria extends javax.swing.JFrame {
             tableModel.addRow(vehiculosData);
         }
          
-          
-         logger.log("Set Table");
-        
+        vehiculosTable.getSelectionModel().addListSelectionListener(new ConcesionariaSelectionListener(this));
+ 
+        logger.log("Set Table");
     }
 
     /**
@@ -210,8 +210,29 @@ public class Concesionaria extends javax.swing.JFrame {
                 new Concesionaria().setVisible(true);
             }
         });
+        
+       
     }
 
+     public void openEditVehiculo(int vehiculoId){
+         // EdicionVehiculos edicionVehiculos =new EdicionVehiculos(vehiculoId);
+          //edicionVehiculos.setVisible(true);
+          testPanel designConcesionariaList2 = new testPanel();
+          
+          JFrame f=new JFrame();
+          
+            f.add(designConcesionariaList2,BorderLayout.CENTER);
+            f.setVisible(true);
+            f.setExtendedState(f.getExtendedState() | JFrame.MAXIMIZED_BOTH);
+            
+         
+                      //designConcesionariaList2.init();
+          //designConcesionariaList2.setVisible(true);
+       
+          //this.add(designConcesionariaList2);
+          designConcesionariaList2.setPreferredSize(new Dimension(200,200));
+          
+    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
@@ -222,4 +243,8 @@ public class Concesionaria extends javax.swing.JFrame {
     private java.awt.Panel panel3;
     private javax.swing.JTable vehiculosTable;
     // End of variables declaration//GEN-END:variables
+
+    public JTable getVehiculosTable() {
+        return vehiculosTable;
+    }
 }

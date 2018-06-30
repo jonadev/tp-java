@@ -10,7 +10,8 @@ import concesionaria.dominio.Moto;
 import concesionaria.dominio.Vehiculo;
 import java.util.ArrayList;
 
-/**
+
+/** 
  *
  * @author kbz
  */
@@ -18,10 +19,31 @@ public class VehiculosService {
     
     public ArrayList<Vehiculo> getAll(){
         
+        return this.getRepositoryVehiculos();
+    }
+    
+    
+     public Vehiculo getById(int id){
+        
+        ArrayList<Vehiculo> vehiculos =  this.getRepositoryVehiculos();
+        
+        for (Vehiculo vehiculo : vehiculos){
+            
+            if (vehiculo.getId() == id) {
+                return vehiculo;
+            }
+        }
+        
+        return null;
+    }
+    
+    
+    private ArrayList<Vehiculo> getRepositoryVehiculos(){
         ArrayList<Vehiculo> vehiculos = new ArrayList<Vehiculo>();
         
         Auto auto1 = new Auto();
         
+        auto1.setId(1);
         auto1.setMarca("VW");
         auto1.setModelo("Gol");
         auto1.setCajaAutomatica(true);
@@ -39,6 +61,7 @@ public class VehiculosService {
         
         Auto auto2 = new Auto();
         
+        auto2.setId(2);
         auto2.setMarca("Ford");
         auto2.setModelo("Ka");
         auto2.setCajaAutomatica(true);
@@ -56,6 +79,7 @@ public class VehiculosService {
         
         Moto moto1 = new Moto();
         
+        moto1.setId(3);
         moto1.setMarca("Zanella");
         moto1.setModelo("Sexy");
         moto1.setCajaAutomatica(false);
