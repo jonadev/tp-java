@@ -7,20 +7,17 @@ package concesionaria;
 
 import concesionaria.customImplementations.ConcesionariaSelectionListener;
 import concesionaria.customImplementations.VehiculosTableModel;
+import concesionaria.dominio.Auto;
+import concesionaria.dominio.Moto;
 import concesionaria.dominio.Vehiculo;
-import concesionaria.servicios.Logger;
+import concesionaria.repositorios.VehiculoRepositorio;
 import concesionaria.servicios.VehiculosService;
-import concesionaria.views.EdicionVehiculos;
 import concesionaria.views.testPanel;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
-import java.awt.event.WindowEvent;
-import java.util.ArrayList;
+import java.util.List;
 import javax.swing.JFrame;
 import javax.swing.JTable;
-import javax.swing.event.ListSelectionEvent;
-import javax.swing.event.ListSelectionListener;
-import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -33,60 +30,44 @@ public class Concesionaria extends javax.swing.JFrame {
      */
     public Concesionaria() {
         initComponents();
-        
-        EdicionVehiculos listadoVehiculos = new EdicionVehiculos();
-        
-      
-    /*   java.awt.EventQueue.invokeLater(new Runnable() {
-    @Override
-    public void run() {
-        listadoVehiculos.toFront();
-        listadoVehiculos.repaint();
-        listadoVehiculos.setVisible(true);
-    }
-});*/
-
-       // listadoVehiculos.dispatchEvent(new WindowEvent(listadoVehiculos, WindowEvent.WINDOW_CLOSING));
-        Logger logger = Logger.getInstancia();
-        logger.log("poniendo panel");
-        //VehiculoRepositorio repo = new VehiculoRepositorio();
-        //repo.guardar();
-        
-         vehiculosTable.removeAll();
-        
+        vehiculosTable.removeAll();
         VehiculosService vehiculoService = new VehiculosService();
         
-         ArrayList<Vehiculo> vehiculos = vehiculoService.getAll();
-         
-            
-         String[] columnNames = {
-                        "Id",
-                        "Marca",
-                        "Modelo",
-                        "Año",
-                        "Kilometros",
-                        "Precio"};
+        // PARA PROBAR EL SAVE
+        //Vehiculo ve = new Moto();
+        //ve.setTipo(1);
+        //ve.setColor("Azul");
+        //VehiculoRepositorio repo = new VehiculoRepositorio();
+        //repo.listar(ve);
+        //System.out.println()
+        
+        List<Vehiculo> vehiculos = vehiculoService.getAll();
+                     
+        String[] columnNames = {
+            "Id",
+            "Marca",
+            "Modelo",
+            "Año",
+            "Kilometros",
+            "Precio"};
          
         VehiculosTableModel tableModel = new VehiculosTableModel(columnNames, 0);
-         vehiculosTable.setModel(tableModel);
+        vehiculosTable.setModel(tableModel);
          
-         for (Vehiculo vehiculo : vehiculos) {
-             
+        for (Vehiculo vehiculo : vehiculos) {
             Object[] vehiculosData = new Object[] {
-                                                    vehiculo.getId(),
-                                                    vehiculo.getMarca(), 
-                                                    vehiculo.getModelo(), 
-                                                    vehiculo.getAnio(), 
-                                                    vehiculo.getCantidadKilometros(), 
-                                                    vehiculo.getPrecio(), 
-                                                    };
+                vehiculo.getId(),
+                vehiculo.getMarca(), 
+                vehiculo.getModelo(), 
+                vehiculo.getAnio(), 
+                vehiculo.getCantidadKilometros(), 
+                vehiculo.getPrecio(), 
+            };
  
             tableModel.addRow(vehiculosData);
         }
          
         vehiculosTable.getSelectionModel().addListSelectionListener(new ConcesionariaSelectionListener(this));
- 
-        logger.log("Set Table");
     }
 
     /**
@@ -202,8 +183,7 @@ public class Concesionaria extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                Logger logger = Logger.getInstancia();
-                logger.log("Iniciando Concesionaria");
+                System.out.println("Iniciando Concesionaria");
                 new Concesionaria().setVisible(true);
             }
         });

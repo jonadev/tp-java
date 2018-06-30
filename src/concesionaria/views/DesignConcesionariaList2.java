@@ -4,6 +4,7 @@ import concesionaria.dominio.Vehiculo;
 import concesionaria.servicios.Logger;
 import concesionaria.servicios.VehiculosService;
 import java.util.ArrayList;
+import java.util.List;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -189,7 +190,7 @@ public class DesignConcesionariaList2 extends javax.swing.JApplet {
         
         VehiculosService vehiculoService = new VehiculosService();
         
-         ArrayList<Vehiculo> vehiculos = vehiculoService.getAll();
+        List<Vehiculo> vehiculos = vehiculoService.getAll();
          
          String[] columnNames = {"First Name",
                         "Last Name",

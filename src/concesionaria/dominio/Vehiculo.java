@@ -14,6 +14,7 @@ public abstract class Vehiculo {
     
 
     private Long id;
+    private int tipo;
     private int ruedas;
     private int anio;
     private String color;
@@ -34,6 +35,14 @@ public abstract class Vehiculo {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public int getTipo() {
+        return tipo;
+    }
+
+    public void setTipo(int tipo) {
+        this.tipo = tipo;
     }
     
     public int getRuedas() {
