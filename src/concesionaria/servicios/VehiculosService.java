@@ -46,6 +46,7 @@ public class VehiculosService {
         auto1.setId(Long.parseLong("1"));
         auto1.setMarca("VW");
         auto1.setModelo("Gol");
+        auto1.setPatente("AA00044");
         auto1.setCajaAutomatica(true);
         auto1.setCantidadAirbags(3);
         auto1.setCantidadKilometros(1000);
@@ -64,6 +65,7 @@ public class VehiculosService {
         auto2.setId(Long.parseLong("2"));
         auto2.setMarca("Ford");
         auto2.setModelo("Ka");
+        auto2.setPatente("AA00044");
         auto2.setCajaAutomatica(true);
         auto2.setCantidadAirbags(1);
         auto2.setCantidadKilometros(12000);
@@ -82,6 +84,7 @@ public class VehiculosService {
         moto1.setId(Long.parseLong("3"));
         moto1.setMarca("Zanella");
         moto1.setModelo("Sexy");
+        moto1.setPatente("AA00044");
         moto1.setCajaAutomatica(false);
         moto1.setCantidadKilometros(1600);
         moto1.setCilindrada(110);
