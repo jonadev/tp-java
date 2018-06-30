@@ -12,7 +12,8 @@ package concesionaria.dominio;
  */
 public abstract class Vehiculo {
     
-    private int id;
+
+    private Long id;
     private int ruedas;
     private int anio;
     private String color;
@@ -26,13 +27,15 @@ public abstract class Vehiculo {
     protected double precio;
     
     
-     public int getId() {
+  
+    public Long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
-    }    
+    }
+    
     public int getRuedas() {
         return ruedas;
     }

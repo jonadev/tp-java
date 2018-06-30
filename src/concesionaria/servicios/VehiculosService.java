@@ -43,7 +43,7 @@ public class VehiculosService {
         
         Auto auto1 = new Auto();
         
-        auto1.setId(1);
+        auto1.setId(Long.parseLong("1"));
         auto1.setMarca("VW");
         auto1.setModelo("Gol");
         auto1.setCajaAutomatica(true);
@@ -61,7 +61,7 @@ public class VehiculosService {
         
         Auto auto2 = new Auto();
         
-        auto2.setId(2);
+        auto2.setId(Long.parseLong("2"));
         auto2.setMarca("Ford");
         auto2.setModelo("Ka");
         auto2.setCajaAutomatica(true);
@@ -79,7 +79,7 @@ public class VehiculosService {
         
         Moto moto1 = new Moto();
         
-        moto1.setId(3);
+        moto1.setId(Long.parseLong("3"));
         moto1.setMarca("Zanella");
         moto1.setModelo("Sexy");
         moto1.setCajaAutomatica(false);

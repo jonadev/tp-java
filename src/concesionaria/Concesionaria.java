@@ -5,20 +5,15 @@
  */
 package concesionaria;
 
-import static com.sun.xml.internal.fastinfoset.alphabet.BuiltInRestrictedAlphabets.table;
 import concesionaria.customImplementations.ConcesionariaSelectionListener;
 import concesionaria.customImplementations.VehiculosTableModel;
 import concesionaria.dominio.Vehiculo;
 import concesionaria.servicios.Logger;
 import concesionaria.servicios.VehiculosService;
-import concesionaria.views.DesignConcesionariaList2;
 import concesionaria.views.EdicionVehiculos;
-import concesionaria.views.prueba;
 import concesionaria.views.testPanel;
 import java.awt.BorderLayout;
-import java.awt.Component;
 import java.awt.Dimension;
-import java.awt.Frame;
 import java.awt.event.WindowEvent;
 import java.util.ArrayList;
 import javax.swing.JFrame;
@@ -54,6 +49,8 @@ public class Concesionaria extends javax.swing.JFrame {
        // listadoVehiculos.dispatchEvent(new WindowEvent(listadoVehiculos, WindowEvent.WINDOW_CLOSING));
         Logger logger = Logger.getInstancia();
         logger.log("poniendo panel");
+        //VehiculoRepositorio repo = new VehiculoRepositorio();
+        //repo.guardar();
         
          vehiculosTable.removeAll();
         
