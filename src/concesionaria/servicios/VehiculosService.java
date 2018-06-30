@@ -8,7 +8,9 @@ package concesionaria.servicios;
 import concesionaria.dominio.Auto;
 import concesionaria.dominio.Moto;
 import concesionaria.dominio.Vehiculo;
-import java.util.ArrayList;
+import concesionaria.repositorios.VehiculoRepositorio;
+import java.util.List;
+
 
 
 /** 
@@ -17,30 +19,16 @@ import java.util.ArrayList;
  */
 public class VehiculosService {
     
-    public ArrayList<Vehiculo> getAll(){
-        
-        return this.getRepositoryVehiculos();
+    VehiculoRepositorio repositorio = new VehiculoRepositorio();
+    
+    
+    public Vehiculo getById(Long id){
+       return repositorio.obtener(id);
     }
     
-    
-     public Vehiculo getById(int id){
-        
-        ArrayList<Vehiculo> vehiculos =  this.getRepositoryVehiculos();
-        
-        for (Vehiculo vehiculo : vehiculos){
-            
-            if (vehiculo.getId() == id) {
-                return vehiculo;
-            }
-        }
-        
-        return null;
-    }
-    
-    
-    private ArrayList<Vehiculo> getRepositoryVehiculos(){
-        ArrayList<Vehiculo> vehiculos = new ArrayList<Vehiculo>();
-        
+    public List<Vehiculo> getAll(){
+        List<Vehiculo> vehiculos = repositorio.listar();
+           
         Auto auto1 = new Auto();
         
         auto1.setId(Long.parseLong("1"));
