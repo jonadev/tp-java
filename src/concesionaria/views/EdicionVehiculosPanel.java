@@ -17,7 +17,8 @@ import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
 /**
- *
+ * Vista de la edicion de vehiculos
+ * 
  * @author kbz
  */
 public class EdicionVehiculosPanel extends javax.swing.JPanel {
@@ -28,7 +29,13 @@ public class EdicionVehiculosPanel extends javax.swing.JPanel {
     private Long idVehiculo;
     private JFrame container;
     private Concesionaria concesionariaFrame;
-    
+   
+    /**
+     * Crea la vista de creacion
+     * 
+     * @param container
+     * @param concesionariaFrame 
+     */
     public EdicionVehiculosPanel(JFrame container, Concesionaria concesionariaFrame) {
         initComponents();
         
@@ -46,6 +53,13 @@ public class EdicionVehiculosPanel extends javax.swing.JPanel {
         this.concesionariaFrame = concesionariaFrame;
     }
     
+    /**
+     * Crea la vista de edicion
+     * 
+     * @param idVehiculo
+     * @param container
+     * @param concesionariaFrame 
+     */
     public EdicionVehiculosPanel(Long idVehiculo, JFrame container,Concesionaria concesionariaFrame) {
         
         initComponents();
@@ -61,6 +75,11 @@ public class EdicionVehiculosPanel extends javax.swing.JPanel {
         this.concesionariaFrame = concesionariaFrame;
     }
     
+    /**
+     * Carga el vehiculo en la vista
+     * 
+     * @param idVehiculo 
+     */
     private void SetVehiculoInForm(Long idVehiculo){
         
         VehiculosService vehiculosService = new VehiculosService();
@@ -91,6 +110,11 @@ public class EdicionVehiculosPanel extends javax.swing.JPanel {
         this.setCustomFields(vehiculo);
     }
     
+    /**
+     * Setea la visibilidad de campos dependiendo del tipo de vehiculo
+     * 
+     * @param vehiculo 
+     */
     private void setVisibilityFieldsByVehiculo(Vehiculo vehiculo){
         
         jLabelCantidadPuertas.setVisible(vehiculo.getClass() == Auto.class);
@@ -106,6 +130,11 @@ public class EdicionVehiculosPanel extends javax.swing.JPanel {
         jTextFieldCantidadTiempos.setVisible(vehiculo.getClass() == Moto.class);
     }
     
+    /** 
+     * Setea la visibilidad de campos para el tipo Auto
+     * 
+     * @param visible 
+     */
     private void setAutoVisibilityFields(Boolean visible){
         
         jLabelCantidadPuertas.setVisible(visible);
@@ -117,6 +146,11 @@ public class EdicionVehiculosPanel extends javax.swing.JPanel {
         jTextFieldLitrosBaul.setVisible(visible);
     }
     
+    /**
+     * Setea la visibilidad de campos para el tipo Moto
+     * 
+     * @param visible 
+     */
     private void setMotoVisibilityFields(Boolean visible){
         
         jLabelIncluyeCasco.setVisible(visible);
@@ -126,6 +160,11 @@ public class EdicionVehiculosPanel extends javax.swing.JPanel {
         jTextFieldCantidadTiempos.setVisible(visible);
     }
     
+    /**
+     * 
+     * 
+     * @param vehiculo 
+     */
     private void setCustomFields(Vehiculo vehiculo){
         if (vehiculo.getClass() == Auto.class) {
             
@@ -146,6 +185,11 @@ public class EdicionVehiculosPanel extends javax.swing.JPanel {
         }
     }
     
+    /**
+     * Validacion de los campos
+     * 
+     * @return true si no hubo errores.
+     */
     private boolean validaciones(){
 
         
@@ -918,6 +962,11 @@ public class EdicionVehiculosPanel extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextFieldPatenteActionPerformed
 
+    /**
+     * Boton de crear o editar
+     * 
+     * @param evt 
+     */
     private void button3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button3ActionPerformed
         // TODO add your handling code here:
        if (this.validaciones()){
@@ -948,6 +997,11 @@ public class EdicionVehiculosPanel extends javax.swing.JPanel {
        }
     }//GEN-LAST:event_button3ActionPerformed
 
+    /**
+     * Setea los valores de los campos en el vehiculo
+     * 
+     * @param vehiculo 
+     */
     private void setCommonValues(Vehiculo vehiculo){
         
         vehiculo.setId(this.idVehiculo);
@@ -989,6 +1043,11 @@ public class EdicionVehiculosPanel extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextFieldPrecioActionPerformed
 
+    /**
+     * Activa los campos visibles para Moto
+     * 
+     * @param evt 
+     */
     private void jRadioButtonMotoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButtonMotoActionPerformed
         
         jRadioButtonAuto.setSelected(false);
@@ -1024,6 +1083,11 @@ public class EdicionVehiculosPanel extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextFieldLitrosBaulActionPerformed
 
+    /**
+     * Activa los campos visibles para Auto
+     * 
+     * @param evt 
+     */
     private void jRadioButtonAutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButtonAutoActionPerformed
         // TODO add your handling code here:
         jRadioButtonMoto.setSelected(false);
@@ -1032,6 +1096,11 @@ public class EdicionVehiculosPanel extends javax.swing.JPanel {
         
     }//GEN-LAST:event_jRadioButtonAutoActionPerformed
 
+    /**
+     * Evento del Boton Eliminar
+     * 
+     * @param evt 
+     */
     private void button2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button2ActionPerformed
         VehiculosService vehiculosService = new VehiculosService();
         int tipo;
@@ -1046,6 +1115,7 @@ public class EdicionVehiculosPanel extends javax.swing.JPanel {
         this.container.dispose();
     }//GEN-LAST:event_button2ActionPerformed
 
+    
     private void jTextFieldMarcaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextFieldMarcaKeyTyped
         int cantidadCaracteres = 25;
         

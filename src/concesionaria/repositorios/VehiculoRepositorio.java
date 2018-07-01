@@ -21,11 +21,17 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
- *
+ * Repositorio de Vehiculos (ABM).
+ *  
  * @author Jona
  */
 public class VehiculoRepositorio extends DatabaseConnection {
-        
+    
+    /**
+     * Guarda el vehiculo en la base de datos. 
+     * 
+     * @param vehiculo  
+     */
     public void guardar(Vehiculo vehiculo) {
         Connection con = null;
         PreparedStatement vps = null;
@@ -81,6 +87,12 @@ public class VehiculoRepositorio extends DatabaseConnection {
         }
     }
     
+    /**
+     * Retorna un Vehiculo de la base de datos.
+     * 
+     * @param id
+     * @return 
+     */   
     public Vehiculo obtener(Long id){
         Connection con = null;
         PreparedStatement ps = null;
@@ -125,6 +137,13 @@ public class VehiculoRepositorio extends DatabaseConnection {
         return vehiculo;
     }
     
+    /**
+     * Construye un Vehiculo a partir del resultado de ResultSet.
+     * 
+     * @param vehiculo
+     * @param rs ResultSet de la query ejecutada
+     * @throws SQLException 
+     */
     private void buildVehiculo(Vehiculo vehiculo,ResultSet rs) throws SQLException{
        
         vehiculo.setId(rs.getLong("id_vehiculo"));
@@ -142,6 +161,13 @@ public class VehiculoRepositorio extends DatabaseConnection {
         vehiculo.setPrecio(rs.getDouble("precio"));
     }
     
+    /**
+     * Setea los valores para las queries a la tabla Vehiculo.
+     * 
+     * @param vehiculo
+     * @param vps PreparedStatement
+     * @throws SQLException 
+     */
     private void setPreparedStatement(Vehiculo vehiculo, PreparedStatement vps) throws SQLException{
         vps.setInt(1, vehiculo.getTipo());
         vps.setInt(2, vehiculo.getRuedas());
@@ -157,6 +183,11 @@ public class VehiculoRepositorio extends DatabaseConnection {
         vps.setDouble(12, vehiculo.getPrecio());
     }
     
+    /**
+     * Obtiene todos los vehiculos en la base de datos
+     * 
+     * @return Lista de Vehiculos
+     */
     public List<Vehiculo> listar(){
         
         Connection con;
@@ -207,6 +238,12 @@ public class VehiculoRepositorio extends DatabaseConnection {
         return vehiculos;
     }
     
+    /**
+     * Elimina los registros de Vehiculos asociados al id.
+     * 
+     * @param id Long
+     * @param tipo int
+     */
     public void eliminar(Long id, int tipo){
         Connection con;
         PreparedStatement ps = null;
@@ -238,6 +275,11 @@ public class VehiculoRepositorio extends DatabaseConnection {
         }
     }
     
+    /**
+     * Actualiza la informacion del vehiculo en la base.
+     * 
+     * @param vehiculo 
+     */
     public void actualizar(Vehiculo vehiculo){
         Connection con = null;
         PreparedStatement ps = null;

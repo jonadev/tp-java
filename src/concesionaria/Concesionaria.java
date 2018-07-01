@@ -24,7 +24,8 @@ import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
 /**
- *
+ * Vista principal de la aplicacion
+ * 
  * @author joni
  */
 public class Concesionaria extends javax.swing.JFrame {
@@ -34,6 +35,7 @@ public class Concesionaria extends javax.swing.JFrame {
      private JFrame frameEdit = new JFrame();
      private EdicionVehiculosPanel previoEdicionVehiculosPanel;
      private ConcesionariaSelectionListener concesionariaSelectionListener;
+    
     /**
      * Creates new form Listado
      */
@@ -46,6 +48,9 @@ public class Concesionaria extends javax.swing.JFrame {
         
     }
 
+    /**
+     * Carga la tabla de vehiculos
+     */
     public void loadTable(){
        
       DefaultTableModel dm = (DefaultTableModel)vehiculosTable.getModel();
@@ -199,6 +204,11 @@ public class Concesionaria extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    /**
+     * Evento del boton CREAR
+     * 
+     * @param evt 
+     */
     private void button3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button3ActionPerformed
 
          JFrame f=new JFrame();
@@ -250,11 +260,16 @@ public class Concesionaria extends javax.swing.JFrame {
         });
     }
 
-      public void openEditVehiculo(Long vehiculoId){
-          this.loadTable();
+    /**
+     * Ejecuta el frame de edicion a partir de la obtencion del vehiculo.
+     * 
+     * @param vehiculoId 
+     */
+    public void openEditVehiculo(Long vehiculoId){
+        this.loadTable();
           
-          if (this.previoEdicionVehiculosPanel != null) 
-            this.frameEdit.remove(this.previoEdicionVehiculosPanel);
+        if (this.previoEdicionVehiculosPanel != null) 
+           this.frameEdit.remove(this.previoEdicionVehiculosPanel);
           
         EdicionVehiculosPanel edicionVehiculosPanel = new EdicionVehiculosPanel(vehiculoId,this.frameEdit, this);
         
@@ -274,6 +289,11 @@ public class Concesionaria extends javax.swing.JFrame {
     private javax.swing.JTable vehiculosTable;
     // End of variables declaration//GEN-END:variables
 
+    /**
+     * Obtiene la tabla de vehiculos
+     * 
+     * @return JTable.
+     */
     public JTable getVehiculosTable() {
         return vehiculosTable;
     }

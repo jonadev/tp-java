@@ -6,8 +6,9 @@
 package concesionaria.dominio;
 
 /**
- *
- * @author joni
+ * Enumera los diferentes tipos de Vehiculos
+ * 
+ * @author Jona
  */
 public enum TipoVehiculo {
     AUTO,
