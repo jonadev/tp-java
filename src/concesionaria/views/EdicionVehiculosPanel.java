@@ -10,6 +10,7 @@ import concesionaria.dominio.Moto;
 import concesionaria.dominio.TipoVehiculo;
 import concesionaria.dominio.Vehiculo;
 import concesionaria.servicios.VehiculosService;
+import java.awt.Color;
 
 /**
  *
@@ -24,6 +25,13 @@ public class EdicionVehiculosPanel extends javax.swing.JPanel {
     
     public EdicionVehiculosPanel() {
         initComponents();
+        this.button3.setLabel("GUARDAR");
+        this.button3.setBackground(Color.GREEN);
+        this.button2.setVisible(false);
+        this.jTextFieldImpuestos.setVisible(false);
+        this.jLabel19.setVisible(false);
+        this.jLabel20.setVisible(false);
+        this.jTextFieldComisionVendedor.setVisible(false);
         this.setAutoVisibilityFields(false);
         this.setMotoVisibilityFields(false);
     }
@@ -31,8 +39,13 @@ public class EdicionVehiculosPanel extends javax.swing.JPanel {
     public EdicionVehiculosPanel(Long idVehiculo) {
         
         initComponents();
+        this.jTextFieldImpuestos.setEditable(false);
+        this.jTextFieldImpuestos.setEnabled(false);
+        this.jTextFieldComisionVendedor.setEditable(false);
+        this.jTextFieldComisionVendedor.setEnabled(false);
         this.idVehiculo = idVehiculo;
         this.SetVehiculoInForm(idVehiculo);
+        
     }
     
     private void SetVehiculoInForm(Long idVehiculo){
