@@ -35,7 +35,7 @@ public class VehiculosService {
             repositorio.guardar(vehiculo);
         }
         else{
-            System.out.println("Borrando " + 
+            System.out.println("Actualizando " + 
                 (vehiculo.getTipo() == TipoVehiculo.AUTO.ordinal() ? "auto " : "moto ") 
                     + vehiculo.getId());
             repositorio.actualizar(vehiculo);

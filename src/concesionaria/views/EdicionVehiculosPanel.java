@@ -701,7 +701,7 @@ public class EdicionVehiculosPanel extends javax.swing.JPanel {
         vehiculo.setCilindrada(Integer.parseInt(jTextFieldCilindrada.getText()));
         vehiculo.setColor(jTextFieldColor.getText());
         vehiculo.setAnio(Integer.parseInt(jTextFieldAnio.getText()));
-        vehiculo.setPrecio(Integer.parseInt(jTextFieldPrecio.getText()));
+        vehiculo.setPrecio(Double.parseDouble(jTextFieldPrecio.getText()));
         vehiculo.setTipoCombustible(jTextFieldTipoCombustible.getText());
     }
     
