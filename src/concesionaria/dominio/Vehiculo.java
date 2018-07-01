@@ -125,8 +125,25 @@ public abstract class Vehiculo {
         this.modelo = modelo;
     }
     
+  /**
+     *
+     * @return double, que es el calculo de comision que le corresponde a cada 
+     * vendedor para cada vehiculo, cada herencia implementara su propia forma
+     * de realizar el calculo
+     */
     public abstract double calcularComisionVendedor();
+
+   /**
+     *
+     * @return double, que es el calculo de impuesto para cada vehiculo, 
+     * cada herencia implementara su propia forma de realizar el calculo
+     */
     public abstract double calcularImpuesto();
+
+        /**
+     *
+     * @return entero que respresenta el tipo de vehiculo
+     */
     public abstract int getTipo();
     
 }

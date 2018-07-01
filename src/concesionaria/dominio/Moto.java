@@ -30,6 +30,11 @@ public class Moto extends Vehiculo {
         this.cantidadTiempoMotor = cantidadTiempoMotor;
     }
 
+    /**
+     *
+     * @return double, que es el calculo de comision que le corresponde a cada 
+     * vendedor para cada moto
+     */
     @Override
     public double calcularComisionVendedor() {
         if (this.cantidadTiempoMotor == 2) 
@@ -38,6 +43,10 @@ public class Moto extends Vehiculo {
         return this.precio * 0.1;
     }
 
+    /**
+     * Calculo de impuesto para motos
+     * @return double
+     */
     @Override
     public double calcularImpuesto() {
         if (this.cantidadTiempoMotor == 2) 
@@ -46,6 +55,10 @@ public class Moto extends Vehiculo {
         return this.precio * 0.21;
     }   
     
+    /**
+     *
+     * @return entero que respresenta el tipo de vehiculo, en este caso la moto
+     */
     @Override
     public int getTipo() {
         return  TipoVehiculo.MOTO.ordinal(); 

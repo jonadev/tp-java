@@ -39,6 +39,11 @@ public class Auto extends Vehiculo {
         this.cantidadAirbags = cantidadAirbags;
     }
 
+    /**
+     *
+     * @return double, que es el calculo de comision que le corresponde a cada 
+     * vendedor para cada auto
+     */
     @Override
     public double calcularComisionVendedor() {
         if (this.litrosBaul > 300) 
@@ -47,6 +52,10 @@ public class Auto extends Vehiculo {
         return this.precio * 0.1;
     }
 
+    /**
+     * Calculo de impuesto para autos
+     * @return double
+     */
     @Override
     public double calcularImpuesto() {
         
@@ -56,6 +65,10 @@ public class Auto extends Vehiculo {
         return this.precio * 0.21;
     }
     
+    /**
+     *
+     * @return entero que respresenta el tipo de vehiculo, en este caso el auto
+     */
     @Override
     public int getTipo() {
         return  TipoVehiculo.AUTO.ordinal(); 
