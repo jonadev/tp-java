@@ -75,7 +75,10 @@ public class Concesionaria extends javax.swing.JFrame {
                 "Modelo",
                 "Año",
                 "Kilometros",
-                "Precio"};
+                "Precio",
+                "Comisión",
+                "Impuesto"
+            };
 
             VehiculosTableModel tableModel = new VehiculosTableModel(columnNames, 0);
             vehiculosTable.setModel(tableModel);
@@ -88,6 +91,8 @@ public class Concesionaria extends javax.swing.JFrame {
                     vehiculo.getAnio(), 
                     vehiculo.getCantidadKilometros(), 
                     vehiculo.getPrecio(), 
+                    vehiculo.calcularComisionVendedor(),
+                    vehiculo.calcularImpuesto()
                 };
 
                 tableModel.addRow(vehiculosData);
