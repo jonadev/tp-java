@@ -259,7 +259,21 @@ public class EdicionVehiculosPanel extends javax.swing.JPanel {
            JOptionPane.showMessageDialog(null, "El campo precio solo puede tener valores decimales con . (punto)", "Error", JOptionPane.ERROR_MESSAGE);
            return false;
         }
+        
+          //Validacion campo Cantidad Ruedas
 
+        if(jTextFieldCantidadRuedas.getText().isEmpty()){
+
+            JOptionPane.showMessageDialog(null, "El campo cantidad de ruedas no puede ser vacio.", "Error", JOptionPane.ERROR_MESSAGE);
+            return false;
+        }
+        else if (!(Pattern.matches("^(\\w+ ?)*$", jTextFieldCantidadRuedas.getText())))  {
+           JOptionPane.showMessageDialog(null, "El campo cantidad de ruedas no puede contener caracteres especiales.", "Error", JOptionPane.ERROR_MESSAGE);
+           return false;
+        }
+
+        
+        
         if(this.jRadioButtonAuto.isSelected()) {
             // Validacion campo litros de auto
             
