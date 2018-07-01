@@ -59,7 +59,7 @@ public class VehiculoRepositorio extends DatabaseConnection {
             Long idVehiculo = null;
             if(vrs.next()) {
                idVehiculo = vrs.getLong(1);
-               if(vehiculo.getTipo() == TipoVehiculo.AUTO.ordinal()){
+               if(vehiculo.getClass() == Auto.class){
                     String aquery = "INSERT INTO auto (id_auto, puertas,"
                         + " litrosBaul, cantidadAirbags) values (?, ?, ?, ?)";
                     tps = con.prepareStatement(aquery, Statement.RETURN_GENERATED_KEYS);
@@ -92,7 +92,7 @@ public class VehiculoRepositorio extends DatabaseConnection {
         }
     }
     
-    public Vehiculo obtener(Long id, Integer tipo){
+    public Vehiculo obtener(Long id){
         Connection con = null;
         PreparedStatement ps = null;
         ResultSet rs = null;
@@ -127,12 +127,12 @@ public class VehiculoRepositorio extends DatabaseConnection {
         
         try{
             con = getConnection();
-            ps = con.prepareStatement("SELECT id, color FROM vehiculo");
+            ps = con.prepareStatement("SELECT id_vehiculo, color FROM vehiculo");
             rs = ps.executeQuery();
             
             while(rs.next()){
                 Auto auto1 = new Auto();
-                auto1.setId(rs.getLong("id"));
+                auto1.setId(rs.getLong("id_vehiculo"));
                 auto1.setModelo(rs.getString("color"));
                 auto1.setCajaAutomatica(true);
                 auto1.setCantidadAirbags(3);

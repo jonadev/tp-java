@@ -25,7 +25,7 @@ public class ConcesionariaSelectionListener implements  ListSelectionListener {
     @Override
     public void valueChanged(ListSelectionEvent e) {
         
-        int idVehiculo = Integer.parseInt(this.concesionaria.getVehiculosTable().getValueAt(this.concesionaria.getVehiculosTable().getSelectedRow(), 0).toString());
+        Long idVehiculo = Long.parseLong(this.concesionaria.getVehiculosTable().getValueAt(this.concesionaria.getVehiculosTable().getSelectedRow(), 0).toString());
         this.concesionaria.openEditVehiculo(idVehiculo);
     }
     

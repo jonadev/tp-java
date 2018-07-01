@@ -24,7 +24,8 @@ public abstract class DatabaseConnection {
     private String puerto = "3306";
     private String esquema = "concesionaria";
     private String user = "root";
-    private String pass = "root";
+    private String pass = "";
+    //private String pass = "root";
     private String  connectionUrl = "jdbc:mysql://"+ ip + ":" + puerto + "/" 
             + esquema + "?" + "user=" + user + "&password=" + pass;
     private static Connection connection;

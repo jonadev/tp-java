@@ -19,27 +19,31 @@ public class EdicionVehiculosPanel extends javax.swing.JPanel {
     /**
      * Creates new form testPanel
      */
+    private Long idVehiculo;
+    
     public EdicionVehiculosPanel() {
         initComponents();
+        this.setAutoVisibilityFields(false);
+        this.setMotoVisibilityFields(false);
     }
     
-    public EdicionVehiculosPanel(int idVehiculo) {
+    public EdicionVehiculosPanel(Long idVehiculo) {
         
         initComponents();
+        this.idVehiculo = idVehiculo;
         this.SetVehiculoInForm(idVehiculo);
     }
     
-    
-    private void SetVehiculoInForm(int idVehiculo){
+    private void SetVehiculoInForm(Long idVehiculo){
         
         VehiculosService vehiculosService = new VehiculosService();
         
-        Vehiculo vehiculo =  null;//vehiculosService.getById(idVehiculo);
+        Vehiculo vehiculo =  vehiculosService.getById(idVehiculo);
         
         if (vehiculo == null) 
             return;
         
-        this.setVisibilityFields(vehiculo);
+        this.setVisibilityFieldsByVehiculo(vehiculo);
         
         jTextFieldMarca.setText(vehiculo.getMarca());
         jTextFieldPatente.setText(vehiculo.getPatente());
@@ -59,20 +63,40 @@ public class EdicionVehiculosPanel extends javax.swing.JPanel {
         this.setCustomFields(vehiculo);
     }
     
-    private void setVisibilityFields(Vehiculo vehiculo){
+    private void setVisibilityFieldsByVehiculo(Vehiculo vehiculo){
         
         jLabelCantidadPuertas.setVisible(vehiculo.getClass() == Auto.class);
         jLabelCantidadAirbags.setVisible(vehiculo.getClass() == Auto.class);
+        jLabelLitrosBaul.setVisible(vehiculo.getClass() == Auto.class);
         jLabelIncluyeCasco.setVisible(vehiculo.getClass() == Moto.class);
         jLabelCantidadTiempos.setVisible(vehiculo.getClass() == Moto.class);
         
         jTextFieldCantidadPuertas.setVisible(vehiculo.getClass() == Auto.class);
         jTextFieldCantidadAirbags.setVisible(vehiculo.getClass() == Auto.class);
+        jTextFieldLitrosBaul.setVisible(vehiculo.getClass() == Auto.class);
         jCheckBoxIncluyeCasco.setVisible(vehiculo.getClass() == Moto.class);
         jTextFieldCantidadTiempos.setVisible(vehiculo.getClass() == Moto.class);
     }
+    
+    private void setAutoVisibilityFields(Boolean visible){
         
-       
+        jLabelCantidadPuertas.setVisible(visible);
+        jLabelCantidadAirbags.setVisible(visible);
+        jLabelLitrosBaul.setVisible(visible);
+        
+        jTextFieldCantidadPuertas.setVisible(visible);
+        jTextFieldCantidadAirbags.setVisible(visible);
+        jTextFieldLitrosBaul.setVisible(visible);
+    }
+    
+    private void setMotoVisibilityFields(Boolean visible){
+        
+        jLabelIncluyeCasco.setVisible(visible);
+        jLabelCantidadTiempos.setVisible(visible);
+        
+        jCheckBoxIncluyeCasco.setVisible(visible);
+        jTextFieldCantidadTiempos.setVisible(visible);
+    }
     
     private void setCustomFields(Vehiculo vehiculo){
         if (vehiculo.getClass() == Auto.class) {
@@ -82,9 +106,9 @@ public class EdicionVehiculosPanel extends javax.swing.JPanel {
             jRadioButtonAuto.setSelected(true);
             jTextFieldCantidadPuertas.setText(Integer.toString(auto.getPuertas()));
             jTextFieldCantidadAirbags.setText(Integer.toString(auto.getCantidadAirbags()));
+            jTextFieldLitrosBaul.setText(Integer.toString(auto.getLitrosBaul()));
         }
         else if(vehiculo.getClass() == Moto.class){
-             System.out.println("Moto"); 
              
             Moto moto = (Moto) vehiculo;
             jRadioButtonMoto.setSelected(true);
@@ -145,6 +169,10 @@ public class EdicionVehiculosPanel extends javax.swing.JPanel {
         jTextFieldComisionVendedor = new javax.swing.JTextField();
         jLabel20 = new javax.swing.JLabel();
         jTextFieldImpuestos = new javax.swing.JTextField();
+        jLabelCantidadRuedas = new javax.swing.JLabel();
+        jTextFieldCantidadRuedas = new javax.swing.JTextField();
+        jLabelLitrosBaul = new javax.swing.JLabel();
+        jTextFieldLitrosBaul = new javax.swing.JTextField();
 
         jTextFieldColor.setFont(new java.awt.Font("SansSerif", 0, 14)); // NOI18N
         jTextFieldColor.addActionListener(new java.awt.event.ActionListener() {
@@ -285,6 +313,11 @@ public class EdicionVehiculosPanel extends javax.swing.JPanel {
         jLabelCajaAutomatica.setText("CAJA AUTOMATICA");
 
         jRadioButtonAuto.setText("Auto");
+        jRadioButtonAuto.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jRadioButtonAutoActionPerformed(evt);
+            }
+        });
 
         jRadioButtonMoto.setText("Moto");
         jRadioButtonMoto.addActionListener(new java.awt.event.ActionListener() {
@@ -356,6 +389,28 @@ public class EdicionVehiculosPanel extends javax.swing.JPanel {
             }
         });
 
+        jLabelCantidadRuedas.setBackground(new java.awt.Color(255, 255, 255));
+        jLabelCantidadRuedas.setFont(new java.awt.Font("SansSerif", 1, 18)); // NOI18N
+        jLabelCantidadRuedas.setText("CANTIDAD RUEDAS");
+
+        jTextFieldCantidadRuedas.setFont(new java.awt.Font("SansSerif", 0, 14)); // NOI18N
+        jTextFieldCantidadRuedas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextFieldCantidadRuedasActionPerformed(evt);
+            }
+        });
+
+        jLabelLitrosBaul.setBackground(new java.awt.Color(255, 255, 255));
+        jLabelLitrosBaul.setFont(new java.awt.Font("SansSerif", 1, 18)); // NOI18N
+        jLabelLitrosBaul.setText("LITROS BAUL");
+
+        jTextFieldLitrosBaul.setFont(new java.awt.Font("SansSerif", 0, 14)); // NOI18N
+        jTextFieldLitrosBaul.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextFieldLitrosBaulActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -377,7 +432,7 @@ public class EdicionVehiculosPanel extends javax.swing.JPanel {
                                         .addGroup(layout.createSequentialGroup()
                                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                                 .addComponent(jTextFieldPatente)
-                                                .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE))
+                                                .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, 197, Short.MAX_VALUE))
                                             .addGap(129, 129, 129)))
                                     .addGroup(layout.createSequentialGroup()
                                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
@@ -400,7 +455,7 @@ public class EdicionVehiculosPanel extends javax.swing.JPanel {
                                 .addGap(112, 112, 112)))
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addGap(0, 25, Short.MAX_VALUE)
+                                .addGap(0, 24, Short.MAX_VALUE)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addComponent(jLabel10)
                                     .addComponent(jTextFieldCantidadKilometros)
@@ -408,38 +463,41 @@ public class EdicionVehiculosPanel extends javax.swing.JPanel {
                                     .addComponent(jTextFieldCilindrada)
                                     .addComponent(jLabel11, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addComponent(jTextFieldPrecio))
-                                .addGap(75, 75, 75)
+                                .addGap(81, 81, 81)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                            .addComponent(jTextFieldCantidadPuertas)
-                                            .addComponent(jLabelCantidadPuertas))
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(jCheckBoxIncluyeCasco)
-                                            .addComponent(jLabelIncluyeCasco, javax.swing.GroupLayout.PREFERRED_SIZE, 182, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                        .addComponent(jTextFieldCantidadAirbags)
-                                        .addComponent(jLabelCantidadAirbags)))
-                                .addGap(18, 18, 18)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(jTextFieldComisionVendedor)
-                                    .addComponent(jLabel19, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(jLabel20, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(jTextFieldImpuestos))
-                                .addContainerGap(2065, Short.MAX_VALUE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jCheckBoxCajaAutomatica)
                                     .addGroup(layout.createSequentialGroup()
                                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(jRadioButtonAuto)
-                                            .addComponent(jRadioButtonMoto)
-                                            .addComponent(jLabel13, javax.swing.GroupLayout.PREFERRED_SIZE, 232, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                        .addGap(59, 59, 59)
+                                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                                .addComponent(jTextFieldCantidadPuertas)
+                                                .addComponent(jLabelCantidadPuertas))
+                                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                                .addComponent(jTextFieldCantidadAirbags)
+                                                .addComponent(jLabelCantidadAirbags)))
+                                        .addGap(18, 18, 18)
                                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                            .addComponent(jTextFieldCantidadTiempos)
-                                            .addComponent(jLabelCantidadTiempos))))
-                                .addContainerGap(2315, Short.MAX_VALUE))
+                                            .addComponent(jTextFieldComisionVendedor)
+                                            .addComponent(jLabel19, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                            .addComponent(jLabel20, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                            .addComponent(jTextFieldImpuestos)))
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                        .addComponent(jTextFieldLitrosBaul, javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(jLabelLitrosBaul, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 182, Short.MAX_VALUE)))
+                                .addContainerGap(2063, Short.MAX_VALUE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jRadioButtonAuto)
+                                    .addComponent(jRadioButtonMoto)
+                                    .addComponent(jLabel13, javax.swing.GroupLayout.PREFERRED_SIZE, 232, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jCheckBoxCajaAutomatica)
+                                    .addComponent(jLabelCantidadRuedas)
+                                    .addComponent(jTextFieldCantidadRuedas, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(87, 87, 87)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jCheckBoxIncluyeCasco)
+                                    .addComponent(jLabelIncluyeCasco, javax.swing.GroupLayout.PREFERRED_SIZE, 182, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabelCantidadTiempos)
+                                    .addComponent(jTextFieldCantidadTiempos, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabelCajaAutomatica, javax.swing.GroupLayout.PREFERRED_SIZE, 232, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
@@ -505,45 +563,45 @@ public class EdicionVehiculosPanel extends javax.swing.JPanel {
                     .addComponent(jLabel5)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(6, 6, 6)
-                        .addComponent(jLabel11)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jTextFieldColor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jTextFieldPrecio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel11)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(jTextFieldColor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jTextFieldPrecio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabelLitrosBaul)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jTextFieldLitrosBaul, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                     .addComponent(jLabel6)
                                     .addComponent(jLabelCajaAutomatica))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                     .addComponent(jTextFieldAnio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jCheckBoxCajaAutomatica)))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabelIncluyeCasco)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jCheckBoxIncluyeCasco)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
+                                    .addComponent(jCheckBoxCajaAutomatica))
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                        .addGap(39, 39, 39)
-                                        .addComponent(jLabel13)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(jRadioButtonAuto))
                                     .addGroup(layout.createSequentialGroup()
                                         .addComponent(jLabel7)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(jTextFieldModelo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(jTextFieldModelo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(40, 40, 40)
                                         .addComponent(jLabel8)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                         .addComponent(jTextFieldTipoCombustible, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                                     .addGroup(layout.createSequentialGroup()
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(jLabelCantidadRuedas)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(jTextFieldCantidadRuedas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(jLabel13)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(jRadioButtonAuto)
                                         .addGap(2, 2, 2)
                                         .addComponent(jRadioButtonMoto)))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -551,7 +609,11 @@ public class EdicionVehiculosPanel extends javax.swing.JPanel {
                                     .addComponent(button3, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(button2, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)))
                             .addGroup(layout.createSequentialGroup()
-                                .addGap(39, 39, 39)
+                                .addGap(43, 43, 43)
+                                .addComponent(jLabelIncluyeCasco)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jCheckBoxIncluyeCasco)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(jLabelCantidadTiempos)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jTextFieldCantidadTiempos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))))
@@ -573,8 +635,45 @@ public class EdicionVehiculosPanel extends javax.swing.JPanel {
 
     private void button3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button3ActionPerformed
         // TODO add your handling code here:
+      
+        VehiculosService vehiculosService = new VehiculosService();
+        
+        if (jRadioButtonAuto.isSelected()) {
+            Auto auto = new Auto();
+            this.setCommonValues(auto);
+            auto.setCantidadAirbags(Integer.parseInt(jTextFieldCantidadAirbags.getText()));
+            auto.setPuertas(Integer.parseInt(jTextFieldCantidadPuertas.getText()));
+            auto.setLitrosBaul(Integer.parseInt(jTextFieldLitrosBaul.getText()));
+            
+            vehiculosService.CrearOActualizar(auto);
+        }
+        else if(jRadioButtonMoto.isSelected()){
+            Moto moto = new Moto();
+            this.setCommonValues(moto);
+            moto.setCascoIncluido(jCheckBoxIncluyeCasco.isSelected());
+            moto.setCantidadTiempoMotor(Integer.parseInt(jTextFieldCantidadTiempos.getText()));
+            
+            vehiculosService.CrearOActualizar(moto);
+        }
     }//GEN-LAST:event_button3ActionPerformed
 
+    private void setCommonValues(Vehiculo vehiculo){
+        
+        vehiculo.setId(this.idVehiculo);
+        vehiculo.setRuedas(Integer.parseInt(jTextFieldCantidadRuedas.getText()));
+        vehiculo.setMarca(jTextFieldMarca.getText());
+        vehiculo.setModelo(jTextFieldModelo.getText());
+        vehiculo.setPatente(jTextFieldPatente.getText());
+        vehiculo.setCajaAutomatica(jCheckBoxCajaAutomatica.isSelected());
+        vehiculo.setCantidadKilometros(Integer.parseInt(jTextFieldCantidadKilometros.getText()));
+        vehiculo.setCilindrada(Integer.parseInt(jTextFieldCilindrada.getText()));
+        vehiculo.setColor(jTextFieldColor.getText());
+        vehiculo.setAnio(Integer.parseInt(jTextFieldAnio.getText()));
+        vehiculo.setPrecio(Integer.parseInt(jTextFieldPrecio.getText()));
+        vehiculo.setTipoCombustible(jTextFieldTipoCombustible.getText());
+    }
+    
+    
     private void jTextFieldAnioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldAnioActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextFieldAnioActionPerformed
@@ -600,7 +699,10 @@ public class EdicionVehiculosPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_jTextFieldPrecioActionPerformed
 
     private void jRadioButtonMotoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButtonMotoActionPerformed
-        // TODO add your handling code here:
+        
+        jRadioButtonAuto.setSelected(false);
+        this.setAutoVisibilityFields(false);
+        this.setMotoVisibilityFields(true);
     }//GEN-LAST:event_jRadioButtonMotoActionPerformed
 
     private void jTextFieldCantidadPuertasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldCantidadPuertasActionPerformed
@@ -622,6 +724,22 @@ public class EdicionVehiculosPanel extends javax.swing.JPanel {
     private void jTextFieldImpuestosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldImpuestosActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextFieldImpuestosActionPerformed
+
+    private void jTextFieldCantidadRuedasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldCantidadRuedasActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextFieldCantidadRuedasActionPerformed
+
+    private void jTextFieldLitrosBaulActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldLitrosBaulActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextFieldLitrosBaulActionPerformed
+
+    private void jRadioButtonAutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButtonAutoActionPerformed
+        // TODO add your handling code here:
+        jRadioButtonMoto.setSelected(false);
+        this.setAutoVisibilityFields(true);
+        this.setMotoVisibilityFields(false);
+        
+    }//GEN-LAST:event_jRadioButtonAutoActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -649,19 +767,23 @@ public class EdicionVehiculosPanel extends javax.swing.JPanel {
     private javax.swing.JLabel jLabelCajaAutomatica;
     private javax.swing.JLabel jLabelCantidadAirbags;
     private javax.swing.JLabel jLabelCantidadPuertas;
+    private javax.swing.JLabel jLabelCantidadRuedas;
     private javax.swing.JLabel jLabelCantidadTiempos;
     private javax.swing.JLabel jLabelIncluyeCasco;
+    private javax.swing.JLabel jLabelLitrosBaul;
     private javax.swing.JRadioButton jRadioButtonAuto;
     private javax.swing.JRadioButton jRadioButtonMoto;
     private javax.swing.JTextField jTextFieldAnio;
     private javax.swing.JTextField jTextFieldCantidadAirbags;
     private javax.swing.JTextField jTextFieldCantidadKilometros;
     private javax.swing.JTextField jTextFieldCantidadPuertas;
+    private javax.swing.JTextField jTextFieldCantidadRuedas;
     private javax.swing.JTextField jTextFieldCantidadTiempos;
     private javax.swing.JTextField jTextFieldCilindrada;
     private javax.swing.JTextField jTextFieldColor;
     private javax.swing.JTextField jTextFieldComisionVendedor;
     private javax.swing.JTextField jTextFieldImpuestos;
+    private javax.swing.JTextField jTextFieldLitrosBaul;
     private javax.swing.JTextField jTextFieldMarca;
     private javax.swing.JTextField jTextFieldModelo;
     private javax.swing.JTextField jTextFieldPatente;

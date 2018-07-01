@@ -21,14 +21,28 @@ public class VehiculosService {
     
     VehiculoRepositorio repositorio = new VehiculoRepositorio();
     
+    public void Crear(Vehiculo vehiculo){
+        
+        repositorio.guardar(vehiculo);
+    }
+    
+    public void CrearOActualizar(Vehiculo vehiculo){
+        
+        if (vehiculo.getId() == null) {
+            repositorio.guardar(vehiculo);
+        }
+        else{
+             repositorio.actualizar(vehiculo);
+        }
+    }
+    
     
     public Vehiculo getById(Long id){
-       return new Auto();
-        //return repositorio.obtener(id);
+        return repositorio.obtener(id);
     }
     
     public List<Vehiculo> getAll(){
-        List<Vehiculo> vehiculos = repositorio.listar();
+        List<Vehiculo> vehiculos  = repositorio.listar();
            
         Auto auto1 = new Auto();
         

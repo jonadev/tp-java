@@ -83,6 +83,7 @@ public class Concesionaria extends javax.swing.JFrame {
         vehiculosTable = new javax.swing.JTable();
         panel3 = new java.awt.Panel();
         jLabel3 = new javax.swing.JLabel();
+        button3 = new java.awt.Button();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -119,36 +120,58 @@ public class Concesionaria extends javax.swing.JFrame {
             .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, 90, Short.MAX_VALUE)
         );
 
+        button3.setActionCommand("CREAR");
+        button3.setBackground(new java.awt.Color(52, 152, 219));
+        button3.setFont(new java.awt.Font("SansSerif", 1, 18)); // NOI18N
+        button3.setForeground(new java.awt.Color(255, 255, 255));
+        button3.setLabel("CREAR");
+        button3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                button3ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 901, Short.MAX_VALUE)
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(layout.createSequentialGroup()
-                    .addContainerGap()
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(panel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                            .addGap(53, 53, 53)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 664, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(164, 164, 164)))
-                    .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+            .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(63, 63, 63)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 664, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(button3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(panel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(layout.createSequentialGroup()
-                    .addGap(11, 11, 11)
-                    .addComponent(panel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(11, 11, 11)
+                .addComponent(panel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addComponent(button3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void button3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button3ActionPerformed
+        EdicionVehiculosPanel edicionVehiculosPanel = new EdicionVehiculosPanel();
+
+         JFrame f=new JFrame();
+
+         f.add(edicionVehiculosPanel,BorderLayout.CENTER);
+         f.setVisible(true);
+         f.setExtendedState(f.getExtendedState() | JFrame.MAXIMIZED_BOTH);
+         edicionVehiculosPanel.setPreferredSize(new Dimension(200,200));
+    }//GEN-LAST:event_button3ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -191,32 +214,21 @@ public class Concesionaria extends javax.swing.JFrame {
        
     }
 
-      public void openEditVehiculo(int vehiculoId){
-         // EdicionVehiculos edicionVehiculos =new EdicionVehiculos(vehiculoId);
-          //edicionVehiculos.setVisible(true);
-          EdicionVehiculosPanel edicionVehiculosPanel = new EdicionVehiculosPanel(vehiculoId);
-          
-           JFrame f=new JFrame();
-          
-            f.add(edicionVehiculosPanel,BorderLayout.CENTER);
-            f.setVisible(true);
-            f.setExtendedState(f.getExtendedState() | JFrame.MAXIMIZED_BOTH);
-            
-         
-                      //designConcesionariaList2.init();
-          //designConcesionariaList2.setVisible(true);
-       
-          //this.add(designConcesionariaList2);
-          edicionVehiculosPanel.setPreferredSize(new Dimension(200,200));
+      public void openEditVehiculo(Long vehiculoId){
+        EdicionVehiculosPanel edicionVehiculosPanel = new EdicionVehiculosPanel(vehiculoId);
+
+         JFrame f=new JFrame();
+
+         f.add(edicionVehiculosPanel,BorderLayout.CENTER);
+         f.setVisible(true);
+         f.setExtendedState(f.getExtendedState() | JFrame.MAXIMIZED_BOTH);
+         edicionVehiculosPanel.setPreferredSize(new Dimension(200,200));
           
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
+    private java.awt.Button button3;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JScrollPane jScrollPane1;
-    private java.awt.Panel panel1;
-    private java.awt.Panel panel2;
     private java.awt.Panel panel3;
     private javax.swing.JTable vehiculosTable;
     // End of variables declaration//GEN-END:variables
