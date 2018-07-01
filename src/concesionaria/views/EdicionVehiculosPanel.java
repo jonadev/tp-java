@@ -31,6 +31,9 @@ public class EdicionVehiculosPanel extends javax.swing.JPanel {
     
     public EdicionVehiculosPanel(JFrame container, Concesionaria concesionariaFrame) {
         initComponents();
+        
+        this.jRadioButtonAuto.setSelected(true);
+        this.setAutoVisibilityFields(true);
         this.button3.setLabel("GUARDAR");
         this.button3.setBackground(Color.GREEN);
         this.button2.setVisible(false);
@@ -38,7 +41,6 @@ public class EdicionVehiculosPanel extends javax.swing.JPanel {
         this.jLabel19.setVisible(false);
         this.jLabel20.setVisible(false);
         this.jTextFieldComisionVendedor.setVisible(false);
-        this.setAutoVisibilityFields(false);
         this.setMotoVisibilityFields(false);
         this.container = container;
         this.concesionariaFrame = concesionariaFrame;
@@ -51,6 +53,8 @@ public class EdicionVehiculosPanel extends javax.swing.JPanel {
         this.jTextFieldImpuestos.setEnabled(false);
         this.jTextFieldComisionVendedor.setEditable(false);
         this.jTextFieldComisionVendedor.setEnabled(false);
+        this.jRadioButtonAuto.setEnabled(false);
+        this.jRadioButtonMoto.setEnabled(false);
         this.idVehiculo = idVehiculo;
         this.SetVehiculoInForm(idVehiculo);
         this.container = container;
