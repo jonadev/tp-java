@@ -101,7 +101,7 @@ public class VehiculoRepositorio extends DatabaseConnection {
         try{
             con = getConnection();
             ps = con.prepareStatement("SELECT * FROM vehiculo LEFT JOIN auto on id_vehiculo = ? LEFT JOIN moto on id_vehiculo = ?");
-            ps.setLong(1, id);
+            ps.setLong(1,id);
             ps.setLong(2, id);
             rs = ps.executeQuery();
             
@@ -113,7 +113,7 @@ public class VehiculoRepositorio extends DatabaseConnection {
                     auto.setPuertas(rs.getInt("puertas"));
                     auto.setLitrosBaul(rs.getInt("litrosBaul"));
                     auto.setCantidadAirbags(rs.getInt("cantidadAirbags"));
-   System.out.println(auto.toString());
+                                
                     return auto;
           
                 }else{
@@ -124,6 +124,7 @@ public class VehiculoRepositorio extends DatabaseConnection {
                       
                       return moto;
                 }
+                
             }
             
         } catch (SQLException ex) {
@@ -139,6 +140,7 @@ public class VehiculoRepositorio extends DatabaseConnection {
     private void setCommonValues(Vehiculo vehiculo,ResultSet rs) throws SQLException{
        
         vehiculo.setId(rs.getLong("id_vehiculo"));
+        vehiculo.setTipo(rs.getInt("tipo"));
         vehiculo.setRuedas(rs.getInt("ruedas"));
         vehiculo.setAnio(rs.getInt("anio"));
         vehiculo.setColor(rs.getString("color"));

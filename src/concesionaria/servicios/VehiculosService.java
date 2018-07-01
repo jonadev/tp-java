@@ -29,13 +29,6 @@ public class VehiculosService {
      
     public List<Vehiculo> getAll(){
         List<Vehiculo> vehiculos = repositorio.listar();
-        
-        Long id = 1L;
-     
-        
-        Vehiculo a = repositorio.obtener(id);
-
-   
         return vehiculos;
     }
     
