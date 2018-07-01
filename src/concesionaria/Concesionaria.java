@@ -14,10 +14,14 @@ import concesionaria.repositorios.VehiculoRepositorio;
 import concesionaria.servicios.VehiculosService;
 import concesionaria.views.EdicionVehiculosPanel;
 import java.awt.BorderLayout;
+import java.awt.Component;
+import java.awt.Container;
 import java.awt.Dimension;
+import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JFrame;
 import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -25,12 +29,34 @@ import javax.swing.JTable;
  */
 public class Concesionaria extends javax.swing.JFrame {
 
+    //private Boolean isEditOpen = false; 
+    
+     private JFrame frameEdit = new JFrame();
+     private EdicionVehiculosPanel previoEdicionVehiculosPanel;
+     private ConcesionariaSelectionListener concesionariaSelectionListener;
     /**
      * Creates new form Listado
      */
     public Concesionaria() {
         initComponents();
-        vehiculosTable.removeAll();
+        
+        vehiculosTable.setRowSelectionAllowed(false);
+        this.loadTable();
+        
+        
+    }
+
+    public void loadTable(){
+       
+      DefaultTableModel dm = (DefaultTableModel)vehiculosTable.getModel();
+        dm.getDataVector().removeAllElements();
+        
+        if (this.concesionariaSelectionListener != null) 
+            vehiculosTable.getSelectionModel().removeListSelectionListener(this.concesionariaSelectionListener);
+            
+        
+        dm.fireTableDataChanged(); // notifies the JTable that the model has changed
+        
         VehiculosService vehiculoService = new VehiculosService();
         
         // PARA PROBAR EL SAVE
@@ -40,36 +66,42 @@ public class Concesionaria extends javax.swing.JFrame {
         //VehiculoRepositorio repo = new VehiculoRepositorio();
         //repo.listar(ve);
         //System.out.println()
-        
-        List<Vehiculo> vehiculos = vehiculoService.getAll();
-                     
-        String[] columnNames = {
-            "Id",
-            "Marca",
-            "Modelo",
-            "Año",
-            "Kilometros",
-            "Precio"};
-         
-        VehiculosTableModel tableModel = new VehiculosTableModel(columnNames, 0);
-        vehiculosTable.setModel(tableModel);
-         
-        for (Vehiculo vehiculo : vehiculos) {
-            Object[] vehiculosData = new Object[] {
-                vehiculo.getId(),
-                vehiculo.getMarca(), 
-                vehiculo.getModelo(), 
-                vehiculo.getAnio(), 
-                vehiculo.getCantidadKilometros(), 
-                vehiculo.getPrecio(), 
-            };
- 
-            tableModel.addRow(vehiculosData);
-        }
-         
-        vehiculosTable.getSelectionModel().addListSelectionListener(new ConcesionariaSelectionListener(this));
-    }
+        try{
+            List<Vehiculo> vehiculos = vehiculoService.getAll();
 
+            String[] columnNames = {
+                "Id",
+                "Marca",
+                "Modelo",
+                "Año",
+                "Kilometros",
+                "Precio"};
+
+            VehiculosTableModel tableModel = new VehiculosTableModel(columnNames, 0);
+            vehiculosTable.setModel(tableModel);
+
+            for (Vehiculo vehiculo : vehiculos) {
+                Object[] vehiculosData = new Object[] {
+                    vehiculo.getId(),
+                    vehiculo.getMarca(), 
+                    vehiculo.getModelo(), 
+                    vehiculo.getAnio(), 
+                    vehiculo.getCantidadKilometros(), 
+                    vehiculo.getPrecio(), 
+                };
+
+                tableModel.addRow(vehiculosData);
+            }   
+            
+            this.concesionariaSelectionListener = new ConcesionariaSelectionListener(this);
+            vehiculosTable.getSelectionModel().addListSelectionListener(this.concesionariaSelectionListener);
+        }
+        catch(Exception e){
+            int a = 0;
+        }
+        
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -163,9 +195,10 @@ public class Concesionaria extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void button3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button3ActionPerformed
-        EdicionVehiculosPanel edicionVehiculosPanel = new EdicionVehiculosPanel();
 
          JFrame f=new JFrame();
+         
+        EdicionVehiculosPanel edicionVehiculosPanel = new EdicionVehiculosPanel(f, this);
 
          f.add(edicionVehiculosPanel,BorderLayout.CENTER);
          f.setVisible(true);
@@ -210,21 +243,24 @@ public class Concesionaria extends javax.swing.JFrame {
                 new Concesionaria().setVisible(true);
             }
         });
-        
-       
     }
 
       public void openEditVehiculo(Long vehiculoId){
-        EdicionVehiculosPanel edicionVehiculosPanel = new EdicionVehiculosPanel(vehiculoId);
-
-         JFrame f=new JFrame();
-
-         f.add(edicionVehiculosPanel,BorderLayout.CENTER);
-         f.setVisible(true);
-         f.setExtendedState(f.getExtendedState() | JFrame.MAXIMIZED_BOTH);
-         edicionVehiculosPanel.setPreferredSize(new Dimension(200,200));
+          this.loadTable();
           
+          if (this.previoEdicionVehiculosPanel != null) 
+            this.frameEdit.remove(this.previoEdicionVehiculosPanel);
+          
+        EdicionVehiculosPanel edicionVehiculosPanel = new EdicionVehiculosPanel(vehiculoId,this.frameEdit, this);
+        
+         this.frameEdit.add(edicionVehiculosPanel,BorderLayout.CENTER);
+         this.frameEdit.setVisible(true);
+         this.frameEdit.setExtendedState(this.frameEdit.getExtendedState() | JFrame.MAXIMIZED_BOTH);
+         edicionVehiculosPanel.setPreferredSize(new Dimension(200,200));
+         this.frameEdit.setFocusable(true);
+         this.previoEdicionVehiculosPanel = edicionVehiculosPanel;
     }
+      
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private java.awt.Button button3;
     private javax.swing.JLabel jLabel3;

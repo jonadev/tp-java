@@ -28,5 +28,4 @@ public class ConcesionariaSelectionListener implements  ListSelectionListener {
         Long idVehiculo = Long.parseLong(this.concesionaria.getVehiculosTable().getValueAt(this.concesionaria.getVehiculosTable().getSelectedRow(), 0).toString());
         this.concesionaria.openEditVehiculo(idVehiculo);
     }
-    
 }

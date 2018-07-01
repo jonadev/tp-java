@@ -151,7 +151,6 @@ public class VehiculoRepositorio extends DatabaseConnection {
         vehiculo.setMarca(rs.getString("marca"));
         vehiculo.setModelo(rs.getString("modelo"));
         vehiculo.setPrecio(rs.getDouble("precio"));
-              
     }
     
     public List<Vehiculo> listar(){

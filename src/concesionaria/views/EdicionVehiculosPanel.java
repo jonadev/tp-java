@@ -5,10 +5,12 @@
  */
 package concesionaria.views;
 
+import concesionaria.Concesionaria;
 import concesionaria.dominio.Auto;
 import concesionaria.dominio.Moto;
 import concesionaria.dominio.Vehiculo;
 import concesionaria.servicios.VehiculosService;
+import javax.swing.JFrame;
 
 /**
  *
@@ -20,18 +22,24 @@ public class EdicionVehiculosPanel extends javax.swing.JPanel {
      * Creates new form testPanel
      */
     private Long idVehiculo;
+    private JFrame container;
+    private Concesionaria concesionariaFrame;
     
-    public EdicionVehiculosPanel() {
+    public EdicionVehiculosPanel(JFrame container, Concesionaria concesionariaFrame) {
         initComponents();
         this.setAutoVisibilityFields(false);
         this.setMotoVisibilityFields(false);
+        this.container = container;
+        this.concesionariaFrame = concesionariaFrame;
     }
     
-    public EdicionVehiculosPanel(Long idVehiculo) {
+    public EdicionVehiculosPanel(Long idVehiculo, JFrame container,Concesionaria concesionariaFrame) {
         
         initComponents();
         this.idVehiculo = idVehiculo;
         this.SetVehiculoInForm(idVehiculo);
+        this.container = container;
+        this.concesionariaFrame = concesionariaFrame;
     }
     
     private void SetVehiculoInForm(Long idVehiculo){
@@ -637,8 +645,8 @@ public class EdicionVehiculosPanel extends javax.swing.JPanel {
 
     private void button3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button3ActionPerformed
         // TODO add your handling code here:
-      
-        VehiculosService vehiculosService = new VehiculosService();
+       
+       VehiculosService vehiculosService = new VehiculosService();
         
         if (jRadioButtonAuto.isSelected()) {
             Auto auto = new Auto();
@@ -657,6 +665,10 @@ public class EdicionVehiculosPanel extends javax.swing.JPanel {
             
             vehiculosService.CrearOActualizar(moto);
         }
+           
+        this.concesionariaFrame.loadTable();
+        this.container.dispose();
+        return;
     }//GEN-LAST:event_button3ActionPerformed
 
     private void setCommonValues(Vehiculo vehiculo){

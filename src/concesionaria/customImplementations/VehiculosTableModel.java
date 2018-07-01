@@ -13,7 +13,7 @@ import javax.swing.table.DefaultTableModel;
  */
 public class VehiculosTableModel extends DefaultTableModel {
 
-    public VehiculosTableModel(String[] columnNames, int rowCount) {
+    public VehiculosTableModel(Object[] columnNames, int rowCount) {
         super(columnNames, rowCount);
     }
      
