@@ -261,7 +261,18 @@ public class EdicionVehiculosPanel extends javax.swing.JPanel {
         }
 
         if(this.jRadioButtonAuto.isSelected()) {
-            // VALIDAR LITROS DE AUTO
+            // Validacion campo litros de auto
+            
+            if(jTextFieldLitrosBaul.getText().isEmpty()){
+
+                JOptionPane.showMessageDialog(null, "El campo litros de baul no puede ser vacio.", "Error", JOptionPane.ERROR_MESSAGE);
+                return false;
+            }
+            else if (!(Pattern.matches("^\\d+$", jTextFieldLitrosBaul.getText())))  {
+               JOptionPane.showMessageDialog(null, "El campo litros de baul solo puede tener valores enteros", "Error", JOptionPane.ERROR_MESSAGE);
+               return false;
+            }
+            
             //Validacion campo Cantidad Puertas DE AUTO
             
             if(jTextFieldCantidadPuertas.getText().isEmpty()){
@@ -365,6 +376,11 @@ public class EdicionVehiculosPanel extends javax.swing.JPanel {
                 jTextFieldColorActionPerformed(evt);
             }
         });
+        jTextFieldColor.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jTextFieldColorKeyTyped(evt);
+            }
+        });
 
         panel1.setBackground(new java.awt.Color(21, 77, 161));
 
@@ -390,11 +406,6 @@ public class EdicionVehiculosPanel extends javax.swing.JPanel {
         button2.setFont(new java.awt.Font("SansSerif", 1, 18)); // NOI18N
         button2.setForeground(new java.awt.Color(255, 255, 255));
         button2.setLabel("ELIMINAR");
-        button2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                button2ActionPerformed(evt);
-            }
-        });
 
         button3.setBackground(new java.awt.Color(52, 152, 219));
         button3.setFont(new java.awt.Font("SansSerif", 1, 18)); // NOI18N
@@ -416,6 +427,11 @@ public class EdicionVehiculosPanel extends javax.swing.JPanel {
                 jTextFieldMarcaActionPerformed(evt);
             }
         });
+        jTextFieldMarca.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jTextFieldMarcaKeyTyped(evt);
+            }
+        });
 
         jLabel4.setBackground(new java.awt.Color(255, 255, 255));
         jLabel4.setFont(new java.awt.Font("SansSerif", 1, 18)); // NOI18N
@@ -425,6 +441,11 @@ public class EdicionVehiculosPanel extends javax.swing.JPanel {
         jTextFieldPatente.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextFieldPatenteActionPerformed(evt);
+            }
+        });
+        jTextFieldPatente.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jTextFieldPatenteKeyTyped(evt);
             }
         });
 
@@ -442,6 +463,11 @@ public class EdicionVehiculosPanel extends javax.swing.JPanel {
                 jTextFieldAnioActionPerformed(evt);
             }
         });
+        jTextFieldAnio.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jTextFieldAnioKeyTyped(evt);
+            }
+        });
 
         jLabel7.setBackground(new java.awt.Color(255, 255, 255));
         jLabel7.setFont(new java.awt.Font("SansSerif", 1, 18)); // NOI18N
@@ -451,6 +477,11 @@ public class EdicionVehiculosPanel extends javax.swing.JPanel {
         jTextFieldModelo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextFieldModeloActionPerformed(evt);
+            }
+        });
+        jTextFieldModelo.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jTextFieldModeloKeyTyped(evt);
             }
         });
 
@@ -464,6 +495,11 @@ public class EdicionVehiculosPanel extends javax.swing.JPanel {
                 jTextFieldTipoCombustibleActionPerformed(evt);
             }
         });
+        jTextFieldTipoCombustible.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jTextFieldTipoCombustibleKeyTyped(evt);
+            }
+        });
 
         jLabel9.setBackground(new java.awt.Color(255, 255, 255));
         jLabel9.setFont(new java.awt.Font("SansSerif", 1, 18)); // NOI18N
@@ -475,11 +511,21 @@ public class EdicionVehiculosPanel extends javax.swing.JPanel {
                 jTextFieldCantidadKilometrosActionPerformed(evt);
             }
         });
+        jTextFieldCantidadKilometros.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jTextFieldCantidadKilometrosKeyTyped(evt);
+            }
+        });
 
         jTextFieldCilindrada.setFont(new java.awt.Font("SansSerif", 0, 14)); // NOI18N
         jTextFieldCilindrada.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextFieldCilindradaActionPerformed(evt);
+            }
+        });
+        jTextFieldCilindrada.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jTextFieldCilindradaKeyTyped(evt);
             }
         });
 
@@ -495,6 +541,11 @@ public class EdicionVehiculosPanel extends javax.swing.JPanel {
         jTextFieldPrecio.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextFieldPrecioActionPerformed(evt);
+            }
+        });
+        jTextFieldPrecio.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jTextFieldPrecioKeyTyped(evt);
             }
         });
 
@@ -530,6 +581,11 @@ public class EdicionVehiculosPanel extends javax.swing.JPanel {
                 jTextFieldCantidadPuertasActionPerformed(evt);
             }
         });
+        jTextFieldCantidadPuertas.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jTextFieldCantidadPuertasKeyTyped(evt);
+            }
+        });
 
         jLabelCantidadAirbags.setBackground(new java.awt.Color(255, 255, 255));
         jLabelCantidadAirbags.setFont(new java.awt.Font("SansSerif", 1, 18)); // NOI18N
@@ -539,6 +595,11 @@ public class EdicionVehiculosPanel extends javax.swing.JPanel {
         jTextFieldCantidadAirbags.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextFieldCantidadAirbagsActionPerformed(evt);
+            }
+        });
+        jTextFieldCantidadAirbags.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jTextFieldCantidadAirbagsKeyTyped(evt);
             }
         });
 
@@ -554,6 +615,11 @@ public class EdicionVehiculosPanel extends javax.swing.JPanel {
         jTextFieldCantidadTiempos.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextFieldCantidadTiemposActionPerformed(evt);
+            }
+        });
+        jTextFieldCantidadTiempos.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jTextFieldCantidadTiemposKeyTyped(evt);
             }
         });
 
@@ -589,6 +655,11 @@ public class EdicionVehiculosPanel extends javax.swing.JPanel {
                 jTextFieldCantidadRuedasActionPerformed(evt);
             }
         });
+        jTextFieldCantidadRuedas.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jTextFieldCantidadRuedasKeyTyped(evt);
+            }
+        });
 
         jLabelLitrosBaul.setBackground(new java.awt.Color(255, 255, 255));
         jLabelLitrosBaul.setFont(new java.awt.Font("SansSerif", 1, 18)); // NOI18N
@@ -598,6 +669,11 @@ public class EdicionVehiculosPanel extends javax.swing.JPanel {
         jTextFieldLitrosBaul.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextFieldLitrosBaulActionPerformed(evt);
+            }
+        });
+        jTextFieldLitrosBaul.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jTextFieldLitrosBaulKeyTyped(evt);
             }
         });
 
@@ -950,6 +1026,155 @@ public class EdicionVehiculosPanel extends javax.swing.JPanel {
          this.concesionariaFrame.loadTable();
         this.container.dispose();
     }//GEN-LAST:event_button2ActionPerformed
+
+    private void jTextFieldMarcaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextFieldMarcaKeyTyped
+        int cantidadCaracteres = 25;
+        
+        if (jTextFieldMarca.getText().length() >= cantidadCaracteres){
+            evt.consume();
+        }
+    }//GEN-LAST:event_jTextFieldMarcaKeyTyped
+
+    private void jTextFieldColorKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextFieldColorKeyTyped
+       char c = evt.getKeyChar();
+        int cantidadCaracteres = 20;
+        
+        if(Character.isDigit(c)){
+            getToolkit().beep();
+            evt.consume();
+        }else if (jTextFieldColor.getText().length() >= cantidadCaracteres){
+            evt.consume();
+        }
+    }//GEN-LAST:event_jTextFieldColorKeyTyped
+
+    private void jTextFieldPatenteKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextFieldPatenteKeyTyped
+        int cantidadCaracteres = 25;
+        
+        if (jTextFieldPatente.getText().length() >= cantidadCaracteres){
+            evt.consume();
+        }
+    }//GEN-LAST:event_jTextFieldPatenteKeyTyped
+
+    private void jTextFieldAnioKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextFieldAnioKeyTyped
+        char c = evt.getKeyChar();
+        int cantidadCaracteres = 4;
+        
+        if(!Character.isDigit(c)){
+            getToolkit().beep();
+            evt.consume();
+        }else if (jTextFieldAnio.getText().length() >= cantidadCaracteres){
+            evt.consume();
+        }
+    }//GEN-LAST:event_jTextFieldAnioKeyTyped
+
+    private void jTextFieldModeloKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextFieldModeloKeyTyped
+        int cantidadCaracteres = 25;
+        
+        if (jTextFieldModelo.getText().length() >= cantidadCaracteres){
+            evt.consume();
+        }
+    }//GEN-LAST:event_jTextFieldModeloKeyTyped
+
+    private void jTextFieldTipoCombustibleKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextFieldTipoCombustibleKeyTyped
+        int cantidadCaracteres = 25;
+        
+        if (jTextFieldTipoCombustible.getText().length() >= cantidadCaracteres){
+            evt.consume();
+        }
+    }//GEN-LAST:event_jTextFieldTipoCombustibleKeyTyped
+
+    private void jTextFieldCantidadKilometrosKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextFieldCantidadKilometrosKeyTyped
+        char c = evt.getKeyChar();
+        int cantidadCaracteres = 20;
+        
+        if(!Character.isDigit(c)){
+            getToolkit().beep();
+            evt.consume();
+        }else if (jTextFieldCantidadKilometros.getText().length() >= cantidadCaracteres){
+            evt.consume();
+        }
+    }//GEN-LAST:event_jTextFieldCantidadKilometrosKeyTyped
+
+    private void jTextFieldCilindradaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextFieldCilindradaKeyTyped
+       char c = evt.getKeyChar();
+        int cantidadCaracteres = 20;
+        
+        if(!Character.isDigit(c)){
+            getToolkit().beep();
+            evt.consume();
+        }else if (jTextFieldCilindrada.getText().length() >= cantidadCaracteres){
+            evt.consume();
+        }
+    }//GEN-LAST:event_jTextFieldCilindradaKeyTyped
+
+    private void jTextFieldCantidadRuedasKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextFieldCantidadRuedasKeyTyped
+        char c = evt.getKeyChar();
+        int cantidadCaracteres = 2;
+        
+        if(!Character.isDigit(c)){
+            getToolkit().beep();
+            evt.consume();
+        }else if (jTextFieldCantidadRuedas.getText().length() >= cantidadCaracteres){
+            evt.consume();
+        }
+    }//GEN-LAST:event_jTextFieldCantidadRuedasKeyTyped
+
+    private void jTextFieldCantidadPuertasKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextFieldCantidadPuertasKeyTyped
+        char c = evt.getKeyChar();
+        int cantidadCaracteres = 2;
+        
+        if(!Character.isDigit(c)){
+            getToolkit().beep();
+            evt.consume();
+        }else if (jTextFieldCantidadPuertas.getText().length() >= cantidadCaracteres){
+            evt.consume();
+        }
+    }//GEN-LAST:event_jTextFieldCantidadPuertasKeyTyped
+
+    private void jTextFieldCantidadAirbagsKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextFieldCantidadAirbagsKeyTyped
+        char c = evt.getKeyChar();
+        int cantidadCaracteres = 2;
+        
+        if(!Character.isDigit(c)){
+            getToolkit().beep();
+            evt.consume();
+        }else if (jTextFieldCantidadAirbags.getText().length() >= cantidadCaracteres){
+            evt.consume();
+        }
+    }//GEN-LAST:event_jTextFieldCantidadAirbagsKeyTyped
+
+    private void jTextFieldLitrosBaulKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextFieldLitrosBaulKeyTyped
+        char c = evt.getKeyChar();
+        int cantidadCaracteres = 6;
+        
+        if(!Character.isDigit(c)){
+            getToolkit().beep();
+            evt.consume();
+        }else if (jTextFieldLitrosBaul.getText().length() >= cantidadCaracteres){
+            evt.consume();
+        }
+    }//GEN-LAST:event_jTextFieldLitrosBaulKeyTyped
+
+    private void jTextFieldCantidadTiemposKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextFieldCantidadTiemposKeyTyped
+        char c = evt.getKeyChar();
+        int cantidadCaracteres = 10;
+        
+        if(!Character.isDigit(c)){
+            getToolkit().beep();
+            evt.consume();
+        }else if (jTextFieldCantidadTiempos.getText().length() >= cantidadCaracteres){
+            evt.consume();
+        }
+    }//GEN-LAST:event_jTextFieldCantidadTiemposKeyTyped
+
+    private void jTextFieldPrecioKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextFieldPrecioKeyTyped
+       
+        int cantidadCaracteres = 25;
+        
+        if (jTextFieldPrecio.getText().length() >= cantidadCaracteres){
+            evt.consume();
+        }
+    }//GEN-LAST:event_jTextFieldPrecioKeyTyped
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
