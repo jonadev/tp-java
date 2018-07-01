@@ -420,6 +420,11 @@ public class EdicionVehiculosPanel extends javax.swing.JPanel {
         button2.setFont(new java.awt.Font("SansSerif", 1, 18)); // NOI18N
         button2.setForeground(new java.awt.Color(255, 255, 255));
         button2.setLabel("ELIMINAR");
+        button2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                button2ActionPerformed(evt);
+            }
+        });
 
         button3.setBackground(new java.awt.Color(52, 152, 219));
         button3.setFont(new java.awt.Font("SansSerif", 1, 18)); // NOI18N
