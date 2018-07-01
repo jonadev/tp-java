@@ -8,8 +8,10 @@ package concesionaria.views;
 import concesionaria.Concesionaria;
 import concesionaria.dominio.Auto;
 import concesionaria.dominio.Moto;
+import concesionaria.dominio.TipoVehiculo;
 import concesionaria.dominio.Vehiculo;
 import concesionaria.servicios.VehiculosService;
+import java.awt.Color;
 import javax.swing.JFrame;
 
 /**
@@ -27,6 +29,13 @@ public class EdicionVehiculosPanel extends javax.swing.JPanel {
     
     public EdicionVehiculosPanel(JFrame container, Concesionaria concesionariaFrame) {
         initComponents();
+        this.button3.setLabel("GUARDAR");
+        this.button3.setBackground(Color.GREEN);
+        this.button2.setVisible(false);
+        this.jTextFieldImpuestos.setVisible(false);
+        this.jLabel19.setVisible(false);
+        this.jLabel20.setVisible(false);
+        this.jTextFieldComisionVendedor.setVisible(false);
         this.setAutoVisibilityFields(false);
         this.setMotoVisibilityFields(false);
         this.container = container;
@@ -36,6 +45,10 @@ public class EdicionVehiculosPanel extends javax.swing.JPanel {
     public EdicionVehiculosPanel(Long idVehiculo, JFrame container,Concesionaria concesionariaFrame) {
         
         initComponents();
+        this.jTextFieldImpuestos.setEditable(false);
+        this.jTextFieldImpuestos.setEnabled(false);
+        this.jTextFieldComisionVendedor.setEditable(false);
+        this.jTextFieldComisionVendedor.setEnabled(false);
         this.idVehiculo = idVehiculo;
         this.SetVehiculoInForm(idVehiculo);
         this.container = container;
@@ -215,6 +228,11 @@ public class EdicionVehiculosPanel extends javax.swing.JPanel {
         button2.setFont(new java.awt.Font("SansSerif", 1, 18)); // NOI18N
         button2.setForeground(new java.awt.Color(255, 255, 255));
         button2.setLabel("ELIMINAR");
+        button2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                button2ActionPerformed(evt);
+            }
+        });
 
         button3.setBackground(new java.awt.Color(52, 152, 219));
         button3.setFont(new java.awt.Font("SansSerif", 1, 18)); // NOI18N
@@ -655,7 +673,7 @@ public class EdicionVehiculosPanel extends javax.swing.JPanel {
             auto.setPuertas(Integer.parseInt(jTextFieldCantidadPuertas.getText()));
             auto.setLitrosBaul(Integer.parseInt(jTextFieldLitrosBaul.getText()));
             
-            vehiculosService.CrearOActualizar(auto);
+            vehiculosService.crearOActualizar(auto);
         }
         else if(jRadioButtonMoto.isSelected()){
             Moto moto = new Moto();
@@ -663,7 +681,7 @@ public class EdicionVehiculosPanel extends javax.swing.JPanel {
             moto.setCascoIncluido(jCheckBoxIncluyeCasco.isSelected());
             moto.setCantidadTiempoMotor(Integer.parseInt(jTextFieldCantidadTiempos.getText()));
             
-            vehiculosService.CrearOActualizar(moto);
+            vehiculosService.crearOActualizar(moto);
         }
            
         this.concesionariaFrame.loadTable();
@@ -754,6 +772,17 @@ public class EdicionVehiculosPanel extends javax.swing.JPanel {
         this.setMotoVisibilityFields(false);
         
     }//GEN-LAST:event_jRadioButtonAutoActionPerformed
+
+    private void button2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button2ActionPerformed
+        VehiculosService vehiculosService = new VehiculosService();
+        int tipo;
+        if(jRadioButtonAuto.isSelected())
+            tipo = TipoVehiculo.AUTO.ordinal();
+        else
+            tipo = TipoVehiculo.MOTO.ordinal();
+            
+        vehiculosService.eliminar(this.idVehiculo, tipo);
+    }//GEN-LAST:event_button2ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
