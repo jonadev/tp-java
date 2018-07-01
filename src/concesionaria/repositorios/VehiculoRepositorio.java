@@ -100,15 +100,30 @@ public class VehiculoRepositorio extends DatabaseConnection {
         
         try{
             con = getConnection();
-            //if tipo select auto o moto
-            ps = con.prepareStatement("SELECT id, color FROM vehiculo WHERE id = ?");
-            ps.setLong(1, id);
+            ps = con.prepareStatement("SELECT * FROM vehiculo LEFT JOIN auto on vehiculo.id_vehiculo = auto.id_auto  LEFT JOIN moto on vehiculo.id_vehiculo = moto.id_moto  where vehiculo.id_vehiculo = ?");
+            ps.setLong(1,id);
             rs = ps.executeQuery();
             
             if(rs.next()){
-                vehiculo = new Auto();
-                vehiculo.setId(rs.getLong("id"));
-                vehiculo.setColor(rs.getString("color"));
+                
+                if(Integer.parseInt(rs.getString("tipo")) == TipoVehiculo.AUTO.ordinal() ){
+                    Auto auto = new Auto();
+                    this.setCommonValues(auto,rs);
+                    auto.setPuertas(rs.getInt("puertas"));
+                    auto.setLitrosBaul(rs.getInt("litrosBaul"));
+                    auto.setCantidadAirbags(rs.getInt("cantidadAirbags"));
+                                
+                    return auto;
+          
+                }else{
+                      Moto moto = new Moto();
+                      this.setCommonValues(moto,rs);
+                      moto.setCascoIncluido(rs.getBoolean("cascoIncluido"));
+                      moto.setCantidadTiempoMotor(rs.getInt("cantidadTiempoMotor"));
+                      
+                      return moto;
+                }
+                
             }
             
         } catch (SQLException ex) {
@@ -116,10 +131,31 @@ public class VehiculoRepositorio extends DatabaseConnection {
         }finally{
             close(ps,rs);
         }
+        
+      
         return vehiculo;
     }
     
+    private void setCommonValues(Vehiculo vehiculo,ResultSet rs) throws SQLException{
+       
+        vehiculo.setId(rs.getLong("id_vehiculo"));
+        //vehiculo.setTipo(rs.getInt("tipo"));
+        vehiculo.setRuedas(rs.getInt("ruedas"));
+        vehiculo.setAnio(rs.getInt("anio"));
+        vehiculo.setColor(rs.getString("color"));
+        vehiculo.setCajaAutomatica(rs.getBoolean("cajaAutomatica"));
+        vehiculo.setTipoCombustible(rs.getString("tipoCombustible"));
+        vehiculo.setCantidadKilometros(rs.getInt("cantidadKilometros"));
+        vehiculo.setCilindrada(rs.getInt("cilindrada"));
+        vehiculo.setPatente(rs.getString("patente"));
+        vehiculo.setMarca(rs.getString("marca"));
+        vehiculo.setModelo(rs.getString("modelo"));
+        vehiculo.setPrecio(rs.getDouble("precio"));
+              
+    }
+    
     public List<Vehiculo> listar(){
+        
         Connection con;
         PreparedStatement ps = null;
         ResultSet rs = null;
@@ -127,24 +163,36 @@ public class VehiculoRepositorio extends DatabaseConnection {
         
         try{
             con = getConnection();
-            ps = con.prepareStatement("SELECT id_vehiculo, color FROM vehiculo");
+            ps = con.prepareStatement("SELECT id_vehiculo, tipo, marca, modelo, anio, cantidadKilometros, precio"
+                    + " FROM vehiculo");
             rs = ps.executeQuery();
             
             while(rs.next()){
-                Auto auto1 = new Auto();
-                auto1.setId(rs.getLong("id_vehiculo"));
-                auto1.setModelo(rs.getString("color"));
-                auto1.setCajaAutomatica(true);
-                auto1.setCantidadAirbags(3);
-                auto1.setCantidadKilometros(1000);
-                auto1.setCilindrada(1600);
-                auto1.setColor("Rojo");
-                auto1.setLitrosBaul(300);
-                auto1.setAnio(2017);
-                auto1.setPrecio(180000);
-                auto1.setPuertas(3);
-                auto1.setTipoCombustible("Nafta");
-                vehiculos.add(auto1);
+                
+          if(rs.getInt("tipo") == TipoVehiculo.AUTO.ordinal()){
+              
+                Auto auto = new Auto();
+                auto.setId(rs.getLong("id_vehiculo"));
+                auto.setMarca(rs.getString("marca"));
+                auto.setModelo(rs.getString("modelo"));
+                auto.setCantidadKilometros(rs.getInt("cantidadKilometros"));
+                auto.setAnio(rs.getInt("anio"));
+                auto.setPrecio(rs.getDouble("precio"));
+                vehiculos.add(auto);
+              
+          }else{
+     
+                Moto moto = new Moto();
+                moto.setId(rs.getLong("id_vehiculo"));
+                moto.setMarca(rs.getString("marca"));
+                moto.setModelo(rs.getString("modelo"));
+                moto.setCantidadKilometros(rs.getInt("cantidadKilometros"));
+                moto.setAnio(rs.getInt("anio"));
+                moto.setPrecio(rs.getDouble("precio"));
+                vehiculos.add(moto);
+              
+          }
+                
             }
             
         } catch (SQLException ex) {
@@ -152,6 +200,7 @@ public class VehiculoRepositorio extends DatabaseConnection {
         }finally{
             close(ps,rs);
         }
+            
         return vehiculos;
     }
     
@@ -186,6 +235,5 @@ public class VehiculoRepositorio extends DatabaseConnection {
         }finally{
             close(ps,null);
         }
-    }   
-    
+    }     
 }

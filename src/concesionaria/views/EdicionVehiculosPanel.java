@@ -49,6 +49,7 @@ public class EdicionVehiculosPanel extends javax.swing.JPanel {
         jTextFieldPatente.setText(vehiculo.getPatente());
         jTextFieldColor.setText(vehiculo.getColor());
         jTextFieldAnio.setText(Integer.toString(vehiculo.getAnio()));
+        jTextFieldCantidadRuedas.setText(Integer.toString(vehiculo.getRuedas()));
         jTextFieldModelo.setText(vehiculo.getModelo());
         jTextFieldTipoCombustible.setText(vehiculo.getTipoCombustible());
         jTextFieldCantidadKilometros.setText(Integer.toString(vehiculo.getCantidadKilometros()));
@@ -104,6 +105,7 @@ public class EdicionVehiculosPanel extends javax.swing.JPanel {
             Auto auto = (Auto) vehiculo;
             
             jRadioButtonAuto.setSelected(true);
+            
             jTextFieldCantidadPuertas.setText(Integer.toString(auto.getPuertas()));
             jTextFieldCantidadAirbags.setText(Integer.toString(auto.getCantidadAirbags()));
             jTextFieldLitrosBaul.setText(Integer.toString(auto.getLitrosBaul()));

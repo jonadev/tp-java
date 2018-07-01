@@ -45,4 +45,9 @@ public class Moto extends Vehiculo {
         
         return this.precio * 0.21;
     }   
+    
+    @Override
+    public int getTipo() {
+        return  TipoVehiculo.MOTO.ordinal(); 
+    }   
 }

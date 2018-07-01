@@ -36,14 +36,6 @@ public abstract class Vehiculo {
     public void setId(Long id) {
         this.id = id;
     }
-
-    public int getTipo() {
-        return tipo;
-    }
-
-    public void setTipo(int tipo) {
-        this.tipo = tipo;
-    }
     
     public int getRuedas() {
         return ruedas;
@@ -135,5 +127,6 @@ public abstract class Vehiculo {
     
     public abstract double calcularComisionVendedor();
     public abstract double calcularImpuesto();
+    public abstract int getTipo();
     
 }
