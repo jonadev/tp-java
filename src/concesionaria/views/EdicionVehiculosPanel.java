@@ -1076,9 +1076,13 @@ public class EdicionVehiculosPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_jTextFieldModeloKeyTyped
 
     private void jTextFieldTipoCombustibleKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextFieldTipoCombustibleKeyTyped
+        char c = evt.getKeyChar();
         int cantidadCaracteres = 25;
         
-        if (jTextFieldTipoCombustible.getText().length() >= cantidadCaracteres){
+        if(Character.isDigit(c)){
+            getToolkit().beep();
+            evt.consume();
+        }else if (jTextFieldTipoCombustible.getText().length() >= cantidadCaracteres){
             evt.consume();
         }
     }//GEN-LAST:event_jTextFieldTipoCombustibleKeyTyped
