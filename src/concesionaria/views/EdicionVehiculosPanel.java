@@ -1250,7 +1250,7 @@ public class EdicionVehiculosPanel extends javax.swing.JPanel {
 
     private void jTextFieldCantidadTiemposKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextFieldCantidadTiemposKeyTyped
         char c = evt.getKeyChar();
-        int cantidadCaracteres = 10;
+        int cantidadCaracteres = 1;
         
         if(!Character.isDigit(c)){
             getToolkit().beep();
