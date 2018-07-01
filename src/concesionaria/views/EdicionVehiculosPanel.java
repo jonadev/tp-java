@@ -7,6 +7,7 @@ package concesionaria.views;
 
 import concesionaria.dominio.Auto;
 import concesionaria.dominio.Moto;
+import concesionaria.dominio.TipoVehiculo;
 import concesionaria.dominio.Vehiculo;
 import concesionaria.servicios.VehiculosService;
 
@@ -207,6 +208,11 @@ public class EdicionVehiculosPanel extends javax.swing.JPanel {
         button2.setFont(new java.awt.Font("SansSerif", 1, 18)); // NOI18N
         button2.setForeground(new java.awt.Color(255, 255, 255));
         button2.setLabel("ELIMINAR");
+        button2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                button2ActionPerformed(evt);
+            }
+        });
 
         button3.setBackground(new java.awt.Color(52, 152, 219));
         button3.setFont(new java.awt.Font("SansSerif", 1, 18)); // NOI18N
@@ -647,7 +653,7 @@ public class EdicionVehiculosPanel extends javax.swing.JPanel {
             auto.setPuertas(Integer.parseInt(jTextFieldCantidadPuertas.getText()));
             auto.setLitrosBaul(Integer.parseInt(jTextFieldLitrosBaul.getText()));
             
-            vehiculosService.CrearOActualizar(auto);
+            vehiculosService.crearOActualizar(auto);
         }
         else if(jRadioButtonMoto.isSelected()){
             Moto moto = new Moto();
@@ -655,7 +661,7 @@ public class EdicionVehiculosPanel extends javax.swing.JPanel {
             moto.setCascoIncluido(jCheckBoxIncluyeCasco.isSelected());
             moto.setCantidadTiempoMotor(Integer.parseInt(jTextFieldCantidadTiempos.getText()));
             
-            vehiculosService.CrearOActualizar(moto);
+            vehiculosService.crearOActualizar(moto);
         }
     }//GEN-LAST:event_button3ActionPerformed
 
@@ -742,6 +748,17 @@ public class EdicionVehiculosPanel extends javax.swing.JPanel {
         this.setMotoVisibilityFields(false);
         
     }//GEN-LAST:event_jRadioButtonAutoActionPerformed
+
+    private void button2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button2ActionPerformed
+        VehiculosService vehiculosService = new VehiculosService();
+        int tipo;
+        if(jRadioButtonAuto.isSelected())
+            tipo = TipoVehiculo.AUTO.ordinal();
+        else
+            tipo = TipoVehiculo.MOTO.ordinal();
+            
+        vehiculosService.eliminar(this.idVehiculo, tipo);
+    }//GEN-LAST:event_button2ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

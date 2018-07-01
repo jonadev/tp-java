@@ -40,18 +40,7 @@ public class VehiculoRepositorio extends DatabaseConnection {
             con = getConnection();
             
             vps = con.prepareStatement(vquery, Statement.RETURN_GENERATED_KEYS);
-            vps.setInt(1, vehiculo.getTipo());
-            vps.setInt(2, vehiculo.getRuedas());
-            vps.setInt(3, vehiculo.getAnio());
-            vps.setString(4, vehiculo.getColor());
-            vps.setBoolean(5, vehiculo.isCajaAutomatica());
-            vps.setString(6, vehiculo.getTipoCombustible());
-            vps.setInt(7, vehiculo.getCantidadKilometros());
-            vps.setInt(8, vehiculo.getCilindrada());
-            vps.setString(9, vehiculo.getPatente());
-            vps.setString(10, vehiculo.getMarca());
-            vps.setString(11, vehiculo.getModelo());
-            vps.setDouble(12, vehiculo.getPrecio());
+            setPreparedStatement(vehiculo, vps);
             
             vps.executeUpdate();
             vrs = vps.getGeneratedKeys();
@@ -108,7 +97,7 @@ public class VehiculoRepositorio extends DatabaseConnection {
                 
                 if(Integer.parseInt(rs.getString("tipo")) == TipoVehiculo.AUTO.ordinal() ){
                     Auto auto = new Auto();
-                    this.setCommonValues(auto,rs);
+                    this.buildVehiculo(auto,rs);
                     auto.setPuertas(rs.getInt("puertas"));
                     auto.setLitrosBaul(rs.getInt("litrosBaul"));
                     auto.setCantidadAirbags(rs.getInt("cantidadAirbags"));
@@ -117,7 +106,7 @@ public class VehiculoRepositorio extends DatabaseConnection {
           
                 }else{
                       Moto moto = new Moto();
-                      this.setCommonValues(moto,rs);
+                      this.buildVehiculo(moto,rs);
                       moto.setCascoIncluido(rs.getBoolean("cascoIncluido"));
                       moto.setCantidadTiempoMotor(rs.getInt("cantidadTiempoMotor"));
                       
@@ -136,7 +125,7 @@ public class VehiculoRepositorio extends DatabaseConnection {
         return vehiculo;
     }
     
-    private void setCommonValues(Vehiculo vehiculo,ResultSet rs) throws SQLException{
+    private void buildVehiculo(Vehiculo vehiculo,ResultSet rs) throws SQLException{
        
         vehiculo.setId(rs.getLong("id_vehiculo"));
         //vehiculo.setTipo(rs.getInt("tipo"));
@@ -152,6 +141,21 @@ public class VehiculoRepositorio extends DatabaseConnection {
         vehiculo.setModelo(rs.getString("modelo"));
         vehiculo.setPrecio(rs.getDouble("precio"));
               
+    }
+    
+    private void setPreparedStatement(Vehiculo vehiculo, PreparedStatement vps) throws SQLException{
+        vps.setInt(1, vehiculo.getTipo());
+        vps.setInt(2, vehiculo.getRuedas());
+        vps.setInt(3, vehiculo.getAnio());
+        vps.setString(4, vehiculo.getColor());
+        vps.setBoolean(5, vehiculo.isCajaAutomatica());
+        vps.setString(6, vehiculo.getTipoCombustible());
+        vps.setInt(7, vehiculo.getCantidadKilometros());
+        vps.setInt(8, vehiculo.getCilindrada());
+        vps.setString(9, vehiculo.getPatente());
+        vps.setString(10, vehiculo.getMarca());
+        vps.setString(11, vehiculo.getModelo());
+        vps.setDouble(12, vehiculo.getPrecio());
     }
     
     public List<Vehiculo> listar(){
@@ -204,18 +208,33 @@ public class VehiculoRepositorio extends DatabaseConnection {
         return vehiculos;
     }
     
-    public void eliminar(Long id){
-        Connection con = null;
+    public void eliminar(Long id, int tipo){
+        Connection con;
         PreparedStatement ps = null;
+        PreparedStatement tps = null;
+        
+        String asql = "DELETE FROM auto WHERE id_auto = ?";
+        String msql = "DELETE FROM moto WHERE id_moto = ?";
+        String vsql = "DELETE FROM vehiculo WHERE id_vehiculo = ?";
         
         try{
             con = getConnection();
-            ps = con.prepareStatement("DELETE FROM vehiculo WHERE id = ?");
+            if(tipo == TipoVehiculo.AUTO.ordinal()){
+                tps = con.prepareStatement(asql);
+            }else {
+                tps = con.prepareStatement(msql);
+            }
+            tps.setLong(1, id);
+            tps.executeUpdate();    
+            
+            ps = con.prepareStatement(vsql);
             ps.setLong(1,id);
-            ps.executeUpdate();               
+            ps.executeUpdate();
+            
         } catch (SQLException ex) {
             Logger.getLogger(VehiculoRepositorio.class.getName()).log(Level.SEVERE, null, ex);
         }finally{
+            close(tps,null);
             close(ps,null);
         }
     }
@@ -223,17 +242,46 @@ public class VehiculoRepositorio extends DatabaseConnection {
     public void actualizar(Vehiculo vehiculo){
         Connection con = null;
         PreparedStatement ps = null;
+        PreparedStatement tps = null;
         
         try{
             con = getConnection();
-            ps = con.prepareStatement("UPDATE vehiculo SET color = ? WHERE id = ?");
-            ps.setString(1, vehiculo.getColor());
-            ps.setLong(2,vehiculo.getId());
-            ps.executeUpdate();               
+            ps = con.prepareStatement("UPDATE vehiculo SET tipo = ?, "
+                + "ruedas = ?, anio = ?, color = ?, cajaAutomatica = ?, "
+                + "tipoCombustible = ?, cantidadKilometros = ?, "
+                + "cilindrada = ?, patente = ?, marca = ?, modelo = ?, "
+                + "precio = ? WHERE id_vehiculo = ?");
+            
+            setPreparedStatement(vehiculo, ps);
+            ps.setLong(13, vehiculo.getId());
+            ps.executeUpdate();
+            
+            if(vehiculo.getClass() == Auto.class){
+                String aquery = "UPDATE auto SET puertas = ?,"
+                    + " litrosBaul = ?, cantidadAirbags = ? "
+                    + "WHERE id_auto = ?";
+                tps = con.prepareStatement(aquery, Statement.RETURN_GENERATED_KEYS);
+                tps.setInt(1, ((Auto)vehiculo).getPuertas());
+                tps.setInt(2, ((Auto)vehiculo).getLitrosBaul());
+                tps.setInt(3, ((Auto)vehiculo).getCantidadAirbags());
+                tps.setLong(4, vehiculo.getId());
+                tps.executeUpdate();
+            } else {
+                String aquery = "UPDATE moto SET cascoIncluido = ?, "
+                    + "cantidadTiempoMotor = ? WHERE id_moto = ?";
+                tps = con.prepareStatement(aquery, Statement.RETURN_GENERATED_KEYS);
+                tps.setBoolean(1, ((Moto)vehiculo).isCascoIncluido());
+                tps.setInt(2, ((Moto)vehiculo).getCantidadTiempoMotor());
+                tps.setLong(3, vehiculo.getId());
+                tps.executeUpdate();
+            }
+
+            
         } catch (SQLException ex) {
             Logger.getLogger(VehiculoRepositorio.class.getName()).log(Level.SEVERE, null, ex);
         }finally{
             close(ps,null);
+            close(tps,null);
         }
     }     
 }
