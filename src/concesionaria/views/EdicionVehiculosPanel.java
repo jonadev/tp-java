@@ -12,7 +12,9 @@ import concesionaria.dominio.TipoVehiculo;
 import concesionaria.dominio.Vehiculo;
 import concesionaria.servicios.VehiculosService;
 import java.awt.Color;
+import java.util.regex.Pattern;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -138,6 +140,162 @@ public class EdicionVehiculosPanel extends javax.swing.JPanel {
             jCheckBoxIncluyeCasco.setSelected(moto.isCascoIncluido());
             jTextFieldCantidadTiempos.setText(Integer.toString(moto.getCantidadTiempoMotor()));
         }
+    }
+    
+    private boolean validaciones(){
+
+        
+        //Validacion campo Marca
+        if(jTextFieldMarca.getText().isEmpty()){
+
+            JOptionPane.showMessageDialog(null, "El campo marca no puede ser vacio.", "Error", JOptionPane.ERROR_MESSAGE);
+            return false;
+        }
+        else if (!(Pattern.matches("^(\\w+ ?)*$", jTextFieldMarca.getText())))  {
+
+            JOptionPane.showMessageDialog(null, "El campo marca no puede contener caracteres especiales.", "Error", JOptionPane.ERROR_MESSAGE);
+            return false;
+        }
+
+        //Validacion campo Patente
+
+        if(jTextFieldPatente.getText().isEmpty()){
+
+            JOptionPane.showMessageDialog(null, "El campo patente no puede ser vacio.", "Error", JOptionPane.ERROR_MESSAGE);
+            return false;
+        }
+        else if (!(Pattern.matches("^(\\w+ ?)*$", jTextFieldPatente.getText())))  {
+          JOptionPane.showMessageDialog(null, "El campo patente no puede contener caracteres especiales.", "Error", JOptionPane.ERROR_MESSAGE);
+          return false;
+        }
+
+        //Validacion campo Color
+        if(jTextFieldColor.getText().isEmpty()){
+
+            JOptionPane.showMessageDialog(null, "El campo color no puede ser vacio.", "Error", JOptionPane.ERROR_MESSAGE);
+            return false;
+        }
+        else if (!(Pattern.matches("^[0-9a-zA-Z]+$", jTextFieldColor.getText())))  {
+           JOptionPane.showMessageDialog(null, "El campo color no puede contener caracteres especiales.", "Error", JOptionPane.ERROR_MESSAGE);
+           return false;
+        }
+
+
+        //Validacion campo Año
+        if(jTextFieldAnio.getText().isEmpty()){
+            JOptionPane.showMessageDialog(null, "El campo año no puede ser vacio.", "Error", JOptionPane.ERROR_MESSAGE);
+            return false;
+        }
+        else if (!(Pattern.matches("^[0-9a-zA-Z]+$", jTextFieldAnio.getText())))  {
+           JOptionPane.showMessageDialog(null, "El campo año no puede contener caracteres especiales.", "Error", JOptionPane.ERROR_MESSAGE);
+           return false;
+        }
+        else if(!(Pattern.matches("^\\d{4}$", jTextFieldAnio.getText())))  {
+            JOptionPane.showMessageDialog(null, "El campo año tiene que tener 4 caracteres.", "Error", JOptionPane.ERROR_MESSAGE);
+            return false;
+
+        }
+
+        //Validacion campo Modelo
+
+        if(jTextFieldModelo.getText().isEmpty()){
+
+            JOptionPane.showMessageDialog(null, "El campo modelo no puede ser vacio.", "Error", JOptionPane.ERROR_MESSAGE);
+            return false;
+        }
+        else if (!(Pattern.matches("^(\\w+ ?)*$", jTextFieldModelo.getText())))  {
+           JOptionPane.showMessageDialog(null, "El campo modelo no puede contener caracteres especiales.", "Error", JOptionPane.ERROR_MESSAGE);
+           return false;
+        }
+
+        //Validacion campo Tipo Combustible
+
+        if(jTextFieldTipoCombustible.getText().isEmpty()){
+
+            JOptionPane.showMessageDialog(null, "El campo tipo combustible no puede ser vacio.", "Error", JOptionPane.ERROR_MESSAGE);
+            return false;
+        }
+        else if (!(Pattern.matches("^(\\w+ ?)*$", jTextFieldTipoCombustible.getText())))  {
+           JOptionPane.showMessageDialog(null, "El campo tipo combustible no puede contener caracteres especiales.", "Error", JOptionPane.ERROR_MESSAGE);
+           return false;
+        }
+
+        //Validacion campo Cantidad Kilometros
+
+        if(jTextFieldCantidadKilometros.getText().isEmpty()){
+
+            JOptionPane.showMessageDialog(null, "El campo cantidad de kilometros no puede ser vacio.", "Error", JOptionPane.ERROR_MESSAGE);
+            return false;
+        }
+        else if (!(Pattern.matches("^(\\w+ ?)*$", jTextFieldCantidadKilometros.getText())))  {
+           JOptionPane.showMessageDialog(null, "El campo cantidad de kilometros no puede contener caracteres especiales.", "Error", JOptionPane.ERROR_MESSAGE);
+           return false;
+        }
+
+        //Validacion campo Cilindrada
+
+        if(jTextFieldCilindrada.getText().isEmpty()){
+
+            JOptionPane.showMessageDialog(null, "El campo cilindrada no puede ser vacio.", "Error", JOptionPane.ERROR_MESSAGE);
+            return false;
+        }
+        else if (!(Pattern.matches("^(\\w+ ?)*$", jTextFieldCilindrada.getText())))  {
+           JOptionPane.showMessageDialog(null, "El campo cilindrada no puede contener caracteres especiales.", "Error", JOptionPane.ERROR_MESSAGE);
+           return false;
+        }
+
+         //Validacion campo Precio
+
+        if(jTextFieldPrecio.getText().isEmpty()){
+
+            JOptionPane.showMessageDialog(null, "El campo precio no puede ser vacio.", "Error", JOptionPane.ERROR_MESSAGE);
+            return false;
+        }
+        else if (!(Pattern.matches("^[0-9]+([.][0-9]+)?$", jTextFieldPrecio.getText())))  {
+           JOptionPane.showMessageDialog(null, "El campo precio solo puede tener valores decimales con . (punto)", "Error", JOptionPane.ERROR_MESSAGE);
+           return false;
+        }
+
+        if(this.jRadioButtonAuto.isSelected()) {
+            // VALIDAR LITROS DE AUTO
+            //Validacion campo Cantidad Puertas DE AUTO
+            
+            if(jTextFieldCantidadPuertas.getText().isEmpty()){
+
+                JOptionPane.showMessageDialog(null, "El campo cantidad de puertas no puede ser vacio.", "Error", JOptionPane.ERROR_MESSAGE);
+                return false;
+            }
+            else if (!(Pattern.matches("^\\d+$", jTextFieldCantidadPuertas.getText())))  {
+               JOptionPane.showMessageDialog(null, "El campo cantidad de puertas solo puede tener valores enteros", "Error", JOptionPane.ERROR_MESSAGE);
+               return false;
+            }
+
+            //Validacion campo Cantidad Airbags DE AUTO
+
+            if(jTextFieldCantidadAirbags.getText().isEmpty()){
+
+                JOptionPane.showMessageDialog(null, "El campo cantidad de airbag no puede ser vacio.", "Error", JOptionPane.ERROR_MESSAGE);
+                return false;
+            }
+            else if (!(Pattern.matches("^\\d+$", jTextFieldCantidadAirbags.getText())))  {
+               JOptionPane.showMessageDialog(null, "El campo cantidad de airbag solo puede tener valores enteros", "Error", JOptionPane.ERROR_MESSAGE);
+               return false;
+            }
+        }else {
+          //Validacion campo Cantidad Tiempos DE MOTO
+
+            if(jTextFieldCantidadTiempos.getText().isEmpty()){
+
+                JOptionPane.showMessageDialog(null, "El campo cantidad de tiempo no puede ser vacio.", "Error", JOptionPane.ERROR_MESSAGE);
+                return false;
+            }
+            else if (!(Pattern.matches("^\\d+$", jTextFieldCantidadTiempos.getText())))  {
+               JOptionPane.showMessageDialog(null, "El campo cantidad de tiempo solo puede tener valores enteros", "Error", JOptionPane.ERROR_MESSAGE);
+               return false;
+            }
+        }
+      
+        return true;
     }
     
     /**
@@ -663,7 +821,8 @@ public class EdicionVehiculosPanel extends javax.swing.JPanel {
 
     private void button3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button3ActionPerformed
         // TODO add your handling code here:
-       
+       if (this.validaciones()){
+            
        VehiculosService vehiculosService = new VehiculosService();
         
         if (jRadioButtonAuto.isSelected()) {
@@ -687,6 +846,7 @@ public class EdicionVehiculosPanel extends javax.swing.JPanel {
         this.concesionariaFrame.loadTable();
         this.container.dispose();
         return;
+       }
     }//GEN-LAST:event_button3ActionPerformed
 
     private void setCommonValues(Vehiculo vehiculo){
