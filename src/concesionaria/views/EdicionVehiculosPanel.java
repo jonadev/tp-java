@@ -782,6 +782,9 @@ public class EdicionVehiculosPanel extends javax.swing.JPanel {
             tipo = TipoVehiculo.MOTO.ordinal();
             
         vehiculosService.eliminar(this.idVehiculo, tipo);
+        
+         this.concesionariaFrame.loadTable();
+        this.container.dispose();
     }//GEN-LAST:event_button2ActionPerformed
 
 
