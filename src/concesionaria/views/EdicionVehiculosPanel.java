@@ -365,6 +365,9 @@ public class EdicionVehiculosPanel extends javax.swing.JPanel {
             else if (!(Pattern.matches("^\\d+$", jTextFieldCantidadTiempos.getText())))  {
                JOptionPane.showMessageDialog(null, "El campo cantidad de tiempo solo puede tener valores enteros", "Error", JOptionPane.ERROR_MESSAGE);
                return false;
+            }else if ( !( (jTextFieldCantidadTiempos.getText().equals("4")) || ((jTextFieldCantidadTiempos.getText().equals("2"))) ))  {
+               JOptionPane.showMessageDialog(null, "El campo cantidad de tiempo solo puede ser 2 o 4", "Error", JOptionPane.ERROR_MESSAGE);
+               return false;
             }
         }
       
