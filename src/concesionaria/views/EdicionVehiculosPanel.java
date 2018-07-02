@@ -191,13 +191,15 @@ public class EdicionVehiculosPanel extends javax.swing.JPanel {
      * @return true si no hubo errores.
      */
     private boolean validaciones(){
-
         
         //Validacion campo Marca
         if(jTextFieldMarca.getText().isEmpty()){
 
             JOptionPane.showMessageDialog(null, "El campo marca no puede ser vacio.", "Error", JOptionPane.ERROR_MESSAGE);
             return false;
+        }else if(jTextFieldMarca.getText().length() > 25 ){
+               JOptionPane.showMessageDialog(null, "Campo marca acepta hasta un maximo de 25 caracteres.", "Error", JOptionPane.ERROR_MESSAGE);
+           return false;
         }
         else if (!(Pattern.matches("^(\\w+ ?)*$", jTextFieldMarca.getText())))  {
 
@@ -211,6 +213,9 @@ public class EdicionVehiculosPanel extends javax.swing.JPanel {
 
             JOptionPane.showMessageDialog(null, "El campo patente no puede ser vacio.", "Error", JOptionPane.ERROR_MESSAGE);
             return false;
+        }else if(jTextFieldPatente.getText().length() > 15 ){
+               JOptionPane.showMessageDialog(null, "Campo patente acepta hasta un maximo de 15 caracteres.", "Error", JOptionPane.ERROR_MESSAGE);
+           return false;
         }
         else if (!(Pattern.matches("^(\\w+ ?)*$", jTextFieldPatente.getText())))  {
           JOptionPane.showMessageDialog(null, "El campo patente no puede contener caracteres especiales.", "Error", JOptionPane.ERROR_MESSAGE);
@@ -222,6 +227,9 @@ public class EdicionVehiculosPanel extends javax.swing.JPanel {
 
             JOptionPane.showMessageDialog(null, "El campo color no puede ser vacio.", "Error", JOptionPane.ERROR_MESSAGE);
             return false;
+        }else if(jTextFieldColor.getText().length() > 20 ){
+               JOptionPane.showMessageDialog(null, "Campo color acepta hasta un maximo de 20 caracteres.", "Error", JOptionPane.ERROR_MESSAGE);
+           return false;
         }
         else if (!(Pattern.matches("^[0-9a-zA-Z]+$", jTextFieldColor.getText())))  {
            JOptionPane.showMessageDialog(null, "El campo color no puede contener caracteres especiales.", "Error", JOptionPane.ERROR_MESSAGE);
@@ -233,6 +241,9 @@ public class EdicionVehiculosPanel extends javax.swing.JPanel {
         if(jTextFieldAnio.getText().isEmpty()){
             JOptionPane.showMessageDialog(null, "El campo año no puede ser vacio.", "Error", JOptionPane.ERROR_MESSAGE);
             return false;
+        }else if(jTextFieldAnio.getText().length() > 4 ){
+               JOptionPane.showMessageDialog(null, "Campo año acepta hasta un maximo de 4 caracteres.", "Error", JOptionPane.ERROR_MESSAGE);
+           return false;
         }
         else if (!(Pattern.matches("^[0-9a-zA-Z]+$", jTextFieldAnio.getText())))  {
            JOptionPane.showMessageDialog(null, "El campo año no puede contener caracteres especiales.", "Error", JOptionPane.ERROR_MESSAGE);
@@ -250,6 +261,9 @@ public class EdicionVehiculosPanel extends javax.swing.JPanel {
 
             JOptionPane.showMessageDialog(null, "El campo modelo no puede ser vacio.", "Error", JOptionPane.ERROR_MESSAGE);
             return false;
+        }else if(jTextFieldModelo.getText().length() > 30 ){
+               JOptionPane.showMessageDialog(null, "Campo modelo acepta hasta un maximo de 30 caracteres.", "Error", JOptionPane.ERROR_MESSAGE);
+           return false;
         }
         else if (!(Pattern.matches("^(\\w+ ?)*$", jTextFieldModelo.getText())))  {
            JOptionPane.showMessageDialog(null, "El campo modelo no puede contener caracteres especiales.", "Error", JOptionPane.ERROR_MESSAGE);
@@ -262,6 +276,9 @@ public class EdicionVehiculosPanel extends javax.swing.JPanel {
 
             JOptionPane.showMessageDialog(null, "El campo tipo combustible no puede ser vacio.", "Error", JOptionPane.ERROR_MESSAGE);
             return false;
+        }else if(jTextFieldTipoCombustible.getText().length() > 20 ){
+               JOptionPane.showMessageDialog(null, "Campo tipo combustible acepta hasta un maximo de 20 caracteres.", "Error", JOptionPane.ERROR_MESSAGE);
+           return false;
         }
         else if (!(Pattern.matches("^(\\w+ ?)*$", jTextFieldTipoCombustible.getText())))  {
            JOptionPane.showMessageDialog(null, "El campo tipo combustible no puede contener caracteres especiales.", "Error", JOptionPane.ERROR_MESSAGE);
@@ -274,6 +291,9 @@ public class EdicionVehiculosPanel extends javax.swing.JPanel {
 
             JOptionPane.showMessageDialog(null, "El campo cantidad de kilometros no puede ser vacio.", "Error", JOptionPane.ERROR_MESSAGE);
             return false;
+        }else if(jTextFieldCantidadKilometros.getText().length() > 6 ){
+               JOptionPane.showMessageDialog(null, "Campo cantidad kilometrose acepta hasta un maximo de 6 caracteres.", "Error", JOptionPane.ERROR_MESSAGE);
+           return false;
         }
         else if (!(Pattern.matches("^(\\w+ ?)*$", jTextFieldCantidadKilometros.getText())))  {
            JOptionPane.showMessageDialog(null, "El campo cantidad de kilometros no puede contener caracteres especiales.", "Error", JOptionPane.ERROR_MESSAGE);
@@ -286,6 +306,9 @@ public class EdicionVehiculosPanel extends javax.swing.JPanel {
 
             JOptionPane.showMessageDialog(null, "El campo cilindrada no puede ser vacio.", "Error", JOptionPane.ERROR_MESSAGE);
             return false;
+        }else if(jTextFieldCilindrada.getText().length() > 6 ){
+               JOptionPane.showMessageDialog(null, "Campo cilindrada acepta hasta un maximo de 6 caracteres.", "Error", JOptionPane.ERROR_MESSAGE);
+           return false;
         }
         else if (!(Pattern.matches("^(\\w+ ?)*$", jTextFieldCilindrada.getText())))  {
            JOptionPane.showMessageDialog(null, "El campo cilindrada no puede contener caracteres especiales.", "Error", JOptionPane.ERROR_MESSAGE);
@@ -298,6 +321,9 @@ public class EdicionVehiculosPanel extends javax.swing.JPanel {
 
             JOptionPane.showMessageDialog(null, "El campo precio no puede ser vacio.", "Error", JOptionPane.ERROR_MESSAGE);
             return false;
+        }else if(jTextFieldPrecio.getText().length() > 25 ){
+               JOptionPane.showMessageDialog(null, "Campo precio acepta hasta un maximo de 25 caracteres.", "Error", JOptionPane.ERROR_MESSAGE);
+           return false;
         }
         else if (!(Pattern.matches("^[0-9]+([.][0-9]+)?$", jTextFieldPrecio.getText())))  {
            JOptionPane.showMessageDialog(null, "El campo precio solo puede tener valores decimales con . (punto)", "Error", JOptionPane.ERROR_MESSAGE);
@@ -310,6 +336,9 @@ public class EdicionVehiculosPanel extends javax.swing.JPanel {
 
             JOptionPane.showMessageDialog(null, "El campo cantidad de ruedas no puede ser vacio.", "Error", JOptionPane.ERROR_MESSAGE);
             return false;
+        }else if(jTextFieldCantidadRuedas.getText().length() > 2 ){
+               JOptionPane.showMessageDialog(null, "Campo cantidad ruedas acepta hasta un maximo de 2 caracteres.", "Error", JOptionPane.ERROR_MESSAGE);
+           return false;
         }
         else if (!(Pattern.matches("^(\\w+ ?)*$", jTextFieldCantidadRuedas.getText())))  {
            JOptionPane.showMessageDialog(null, "El campo cantidad de ruedas no puede contener caracteres especiales.", "Error", JOptionPane.ERROR_MESSAGE);
@@ -325,7 +354,10 @@ public class EdicionVehiculosPanel extends javax.swing.JPanel {
 
                 JOptionPane.showMessageDialog(null, "El campo litros de baul no puede ser vacio.", "Error", JOptionPane.ERROR_MESSAGE);
                 return false;
-            }
+            }else if(jTextFieldLitrosBaul.getText().length() > 6 ){
+               JOptionPane.showMessageDialog(null, "Campo litros baul acepta hasta un maximo de 6 caracteres.", "Error", JOptionPane.ERROR_MESSAGE);
+           return false;
+        }
             else if (!(Pattern.matches("^\\d+$", jTextFieldLitrosBaul.getText())))  {
                JOptionPane.showMessageDialog(null, "El campo litros de baul solo puede tener valores enteros", "Error", JOptionPane.ERROR_MESSAGE);
                return false;
@@ -337,7 +369,10 @@ public class EdicionVehiculosPanel extends javax.swing.JPanel {
 
                 JOptionPane.showMessageDialog(null, "El campo cantidad de puertas no puede ser vacio.", "Error", JOptionPane.ERROR_MESSAGE);
                 return false;
-            }
+            }else if(jTextFieldCantidadPuertas.getText().length() > 2 ){
+               JOptionPane.showMessageDialog(null, "Campo cantidad puertas acepta hasta un maximo de 2 caracteres.", "Error", JOptionPane.ERROR_MESSAGE);
+           return false;
+        }
             else if (!(Pattern.matches("^\\d+$", jTextFieldCantidadPuertas.getText())))  {
                JOptionPane.showMessageDialog(null, "El campo cantidad de puertas solo puede tener valores enteros", "Error", JOptionPane.ERROR_MESSAGE);
                return false;
@@ -349,7 +384,10 @@ public class EdicionVehiculosPanel extends javax.swing.JPanel {
 
                 JOptionPane.showMessageDialog(null, "El campo cantidad de airbag no puede ser vacio.", "Error", JOptionPane.ERROR_MESSAGE);
                 return false;
-            }
+            }else if(jTextFieldCantidadAirbags.getText().length() > 2 ){
+               JOptionPane.showMessageDialog(null, "Campo cantidad airbags acepta hasta un maximo de 2 caracteres.", "Error", JOptionPane.ERROR_MESSAGE);
+           return false;
+        }
             else if (!(Pattern.matches("^\\d+$", jTextFieldCantidadAirbags.getText())))  {
                JOptionPane.showMessageDialog(null, "El campo cantidad de airbag solo puede tener valores enteros", "Error", JOptionPane.ERROR_MESSAGE);
                return false;
@@ -361,7 +399,10 @@ public class EdicionVehiculosPanel extends javax.swing.JPanel {
 
                 JOptionPane.showMessageDialog(null, "El campo cantidad de tiempo no puede ser vacio.", "Error", JOptionPane.ERROR_MESSAGE);
                 return false;
-            }
+            }else if(jTextFieldCantidadTiempos.getText().length() > 1 ){
+               JOptionPane.showMessageDialog(null, "Campo cantidad tiempos acepta hasta un maximo de 1 caracter.", "Error", JOptionPane.ERROR_MESSAGE);
+           return false;
+        }
             else if (!(Pattern.matches("^\\d+$", jTextFieldCantidadTiempos.getText())))  {
                JOptionPane.showMessageDialog(null, "El campo cantidad de tiempo solo puede tener valores enteros", "Error", JOptionPane.ERROR_MESSAGE);
                return false;
@@ -1181,7 +1222,7 @@ public class EdicionVehiculosPanel extends javax.swing.JPanel {
 
     private void jTextFieldCantidadKilometrosKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextFieldCantidadKilometrosKeyTyped
         char c = evt.getKeyChar();
-        int cantidadCaracteres = 20;
+        int cantidadCaracteres = 6;
         
         if(!Character.isDigit(c)){
             getToolkit().beep();
@@ -1193,7 +1234,7 @@ public class EdicionVehiculosPanel extends javax.swing.JPanel {
 
     private void jTextFieldCilindradaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextFieldCilindradaKeyTyped
        char c = evt.getKeyChar();
-        int cantidadCaracteres = 20;
+        int cantidadCaracteres = 6;
         
         if(!Character.isDigit(c)){
             getToolkit().beep();
